@@ -29,7 +29,7 @@ permalink: /
           dan pengembangan ekosistem deepin di Indonesia.
         </p>
         <div class="donasi-notes">
-          <p><i class="fas fa-info-circle"></i> Nama, email, dan nomor HP bersifat <strong>opsional</strong>. Jika diisi, identitas Anda akan ditampilkan bersama donasi. Jika dikosongkan, donasi dianggap <strong>anonim</strong>.</p>
+          <p><i class="fas fa-info-circle"></i> Nama, <strong>email</strong>, dan nomor HP bersifat <strong>opsional</strong>. Jika diisi, identitas Anda akan ditampilkan bersama donasi (email akan disensor). Jika dikosongkan, donasi dianggap <strong>anonim</strong>.</p>
         </div>
       </div>
       <div class="donasi-card__payment">
@@ -76,27 +76,24 @@ permalink: /
     <div class="section-header">
       <h2><i class="fas fa-trophy" style="color: #f59e0b;"></i> Apresiasi Donatur</h2>
       <p class="section-subtitle">
-        Total <strong>{{ all_count }}</strong> donasi terkumpul senilai <strong>Rp {{ all_total | divided_by: 1000 | append: "K" }}</strong>. 
-        Donasi publik dengan email yang sama akan digabung dan ditotal.
+        Total <strong>{{ all_count }}</strong> donasi terkumpul senilai <strong>Rp {{ all_total | divided_by: 1000 | append: "K" }}</strong>.
       </p>
     </div>
 
-    <div class="donor-grid">
-      {% comment %}--- Card Donatur Anonim ---{% endcomment %}
-      {% if anon_count > 0 %}
-      <div class="donor-card donor-card--top donor-card--anon">
-        <div class="donor-rank">
-          <i class="fas fa-user-secret"></i>
-        </div>
-        <div class="donor-avatar">
-          <span class="donor-initial donor-initial--anon"><i class="fas fa-users"></i></span>
-        </div>
-        <h3 class="donor-name">Donatur Anonim</h3>
-        <p class="donor-amount">Rp {{ anon_total | divided_by: 1000 | append: "K" }}</p>
-        <p class="donor-meta">{{ anon_count }} donasi anonim</p>
+    {% comment %}--- Row Anonim full-width ---{% endcomment %}
+    {% if anon_count > 0 %}
+    <div class="donor-anon-banner">
+      <div class="donor-anon-banner__icon">
+        <i class="fas fa-user-secret"></i>
       </div>
-      {% endif %}
+      <div class="donor-anon-banner__info">
+        <h3>Donatur Anonim</h3>
+        <p>{{ anon_count }} donasi &middot; total <strong>Rp {{ anon_total | divided_by: 1000 | append: "K" }}</strong></p>
+      </div>
+    </div>
+    {% endif %}
 
+    <div class="donor-grid">
       {% comment %}--- Top 3 public donors (individual) ---{% endcomment %}
       {% assign public_donors = "" | split: "" %}
       {% for d in site.data.donors %}

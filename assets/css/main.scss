@@ -1979,3 +1979,47 @@ a {
   color: var(--color-gray-400);
   margin-top: .35rem;
 }
+
+/* ===== Donor Anon Banner ===== */
+.donor-anon-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--color-gray-50);
+  border: 2px dashed var(--color-gray-300);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.donor-anon-banner__icon {
+  font-size: 1.8rem;
+  color: var(--color-gray-400);
+  flex-shrink: 0;
+}
+
+.donor-anon-banner__info {
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-gray-700);
+    margin-bottom: .15rem;
+  }
+
+  p {
+    font-size: .9rem;
+    color: var(--color-gray-500);
+    margin: 0;
+
+    strong { color: var(--color-gray-700); }
+  }
+}
+
+@media (max-width: 480px) {
+  .donor-anon-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+    gap: .75rem;
+  }
+}
