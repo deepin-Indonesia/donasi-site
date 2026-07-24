@@ -1958,3 +1958,24 @@ a {
     font-size: 1.4rem;
   }
 }
+
+/* ===== Donor Card Extras ===== */
+.donor-card--anon {
+  border: 2px dashed var(--color-gray-300);
+  background: var(--color-gray-50);
+
+  .donor-rank { color: var(--color-gray-400); }
+}
+
+.donor-email-sensor {
+  font-size: .78rem;
+  color: var(--color-gray-400);
+  margin-bottom: .25rem;
+  font-family: var(--font-mono);
+}
+
+.donor-meta {
+  font-size: .78rem;
+  color: var(--color-gray-400);
+  margin-top: .35rem;
+}

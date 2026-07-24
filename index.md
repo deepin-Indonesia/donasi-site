@@ -54,19 +54,81 @@ permalink: /
   </div>
 </section>
 
-<!-- Top Donors -->
+<!-- Donors Section -->
 {% if site.data.donors %}
 <section class="donasi-donors">
   <div class="container">
-    {% assign top_donors = site.data.donors | sort: "amount" | reverse %}
-    
-    {% if top_donors.size > 0 %}
+
+    {% comment %}--- Hitung donatur anonim ---{% endcomment %}
+    {% assign anon_total = 0 %}
+    {% assign anon_count = 0 %}
+    {% for d in site.data.donors %}
+      {% if d.name == "" or d.name == nil %}
+        {% assign anon_total = anon_total | plus: d.amount %}
+        {% assign anon_count = anon_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %}--- Donasi publik digrup by email ---{% endcomment %}
+    {% assign public_donors = "" | split: "" %}
+    {% for d in site.data.donors %}
+      {% if d.name != "" and d.name != nil %}
+        {% assign public_donors = public_donors | push: d %}
+      {% endif %}
+    {% endfor %}
+    {% assign grouped = public_donors | group_by: "email" %}
+
+    {% comment %}--- Hitung total per email ---{% endcomment %}
+    {% assign donor_groups = "" | split: "" %}
+    {% for group in grouped %}
+      {% if group.name != "" and group.name != nil %}
+        {% assign total = 0 %}
+        {% assign count = 0 %}
+        {% assign last_donation = group.items | first %}
+        {% for item in group.items %}
+          {% assign total = total | plus: item.amount %}
+          {% assign count = count | plus: 1 %}
+        {% endfor %}
+        {% assign entry = "" | split: "" %}
+        {% assign entry = entry | push: last_donation.name %}
+        {% assign entry = entry | push: last_donation.email %}
+        {% assign entry = entry | push: total %}
+        {% assign entry = entry | push: count %}
+        {% assign donor_groups = donor_groups | push: entry %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %}--- Urutkan by total ---{% endcomment %}
+    {% assign sorted_groups = donor_groups | sort: "2" | reverse %}
+
     <div class="section-header">
       <h2><i class="fas fa-trophy" style="color: #f59e0b;"></i> Top Donatur</h2>
-      <p class="section-subtitle">Terima kasih kepada para donatur yang telah mendukung kami.</p>
+      <p class="section-subtitle">Terima kasih kepada para donatur yang telah mendukung kami. Donasi publik digabung berdasarkan email yang sama.</p>
     </div>
+
     <div class="donor-grid">
-      {% for donor in top_donors limit:3 %}
+      {% comment %}--- Card Donatur Anonim ---{% endcomment %}
+      {% if anon_count > 0 %}
+      <div class="donor-card donor-card--top donor-card--anon">
+        <div class="donor-rank">
+          <i class="fas fa-user-secret"></i>
+        </div>
+        <div class="donor-avatar">
+          <span class="donor-initial donor-initial--anon"><i class="fas fa-users"></i></span>
+        </div>
+        <h3 class="donor-name">Donatur Anonim</h3>
+        <p class="donor-amount">Rp {{ anon_total | divided_by: 1000 | append: "K" }}</p>
+        <p class="donor-meta">{{ anon_count }} donasi anonim</p>
+      </div>
+      {% endif %}
+
+      {% comment %}--- Top 3 public donors (grouped) ---{% endcomment %}
+      {% for group in sorted_groups limit:3 %}
+      {% assign gname = group[0] %}
+      {% assign gemail = group[1] %}
+      {% assign gtotal = group[2] %}
+      {% assign gcount = group[3] %}
+      {% assign censor = gemail | split: "@" | first | append: "@***" %}
       <div class="donor-card donor-card--top">
         <div class="donor-rank">
           {% if forloop.index == 1 %}
@@ -78,25 +140,20 @@ permalink: /
           {% endif %}
         </div>
         <div class="donor-avatar">
-          {% if donor.name %}
-          <span class="donor-initial">{{ donor.name | slice: 0 | upcase }}</span>
-          {% else %}
-          <span class="donor-initial donor-initial--anon"><i class="fas fa-user-secret"></i></span>
-          {% endif %}
+          <span class="donor-initial">{{ gname | slice: 0 | upcase }}</span>
         </div>
-        <h3 class="donor-name">{% if donor.name %}{{ donor.name }}{% else %}Anonim{% endif %}</h3>
-        <p class="donor-amount">Rp {{ donor.amount | divided_by: 1000 | append: "K" }}</p>
-        {% if donor.message and donor.message != "" %}
-        <p class="donor-message">"{{ donor.message }}"</p>
+        <h3 class="donor-name">{{ gname }}</h3>
+        <p class="donor-email-sensor">{{ censor }}</p>
+        <p class="donor-amount">Rp {{ gtotal | divided_by: 1000 | append: "K" }}</p>
+        {% if gcount > 1 %}
+        <p class="donor-meta">{{ gcount }}x donasi</p>
         {% endif %}
       </div>
       {% endfor %}
     </div>
-    {% endif %}
 
     <!-- Latest Donors -->
     {% assign latest = site.data.donors | sort: "date" | reverse %}
-    {% if latest.size > 0 %}
     <div class="section-header" style="margin-top: 3.5rem;">
       <h2><i class="fas fa-clock" style="color: var(--deepin-blue);"></i> Donasi Terbaru</h2>
     </div>
@@ -112,7 +169,7 @@ permalink: /
       </div>
       {% endfor %}
     </div>
-    {% endif %}
+
   </div>
 </section>
 {% endif %}
