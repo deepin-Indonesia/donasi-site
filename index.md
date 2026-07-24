@@ -80,7 +80,7 @@ permalink: /
         Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
       </p>
       <p class="donor-updated-note">
-        <i class="fas fa-sync-alt"></i> Data per {{ "now" | date: "%d %B %Y, %H:%M WIB" }} — dicatat manual oleh admin. Data di bawah ini adalah akumulasi sejak halaman donasi dibuat.
+        <i class="fas fa-sync-alt"></i> Data per 24 July 2026, 01:44 WIB
       </p>
     </div>
 
