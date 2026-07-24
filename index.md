@@ -98,16 +98,38 @@ permalink: /
     {% endif %}
 
     <div class="donor-grid">
-      {% comment %}--- Top 3 public donors (individual) ---{% endcomment %}
+      {% comment %}--- Group by email & hitung total ---{% endcomment %}
       {% assign public_donors = "" | split: "" %}
       {% for d in site.data.donors %}
         {% if d.name != "" and d.name != nil %}
           {% assign public_donors = public_donors | push: d %}
         {% endif %}
       {% endfor %}
-      {% assign sorted_public = public_donors | sort: "amount" | reverse %}
 
-      {% for donor in sorted_public limit:3 %}
+      {% assign grouped = public_donors | group_by: "email" %}
+      {% assign top_groups = "" | split: "" %}
+      {% for g in grouped %}
+        {% if g.name != "" and g.name != nil %}
+          {% assign gtotal = 0 %}
+          {% assign gcount = 0 %}
+          {% for item in g.items %}
+            {% assign gtotal = gtotal | plus: item.amount %}
+            {% assign gcount = gcount | plus: 1 %}
+          {% endfor %}
+          {% assign first = g.items | first %}
+          {% assign gtotal_str = gtotal | prepend: "000000" | slice: -6, 6 %}
+          {% capture entry %}{{ gtotal_str }}|{{ first.name }}|{{ first.email }}|{{ gtotal }}|{{ gcount }}{% endcapture %}
+          {% assign top_groups = top_groups | push: entry %}
+        {% endif %}
+      {% endfor %}
+      {% assign sorted_top = top_groups | sort | reverse %}
+
+      {% for entry in sorted_top limit:3 %}
+      {% assign parts = entry | split: "|" %}
+      {% assign gname = parts[1] %}
+      {% assign gemail = parts[2] %}
+      {% assign gtotal = parts[3] | plus: 0 %}
+      {% assign gcount = parts[4] | plus: 0 %}
       <div class="donor-card donor-card--top">
         <div class="donor-rank">
           {% if forloop.index == 1 %}
@@ -119,14 +141,15 @@ permalink: /
           {% endif %}
         </div>
         <div class="donor-avatar">
-          <span class="donor-initial">{{ donor.name | slice: 0 | upcase }}</span>
+          <span class="donor-initial">{{ gname | slice: 0 | upcase }}</span>
         </div>
-        <h3 class="donor-name">{{ donor.name }}</h3>
-        {% if donor.email != "" and donor.email != nil %}
-        {% assign email_parts = donor.email | split: "@" %}
+        <h3 class="donor-name">{{ gname }}</h3>
+        {% assign email_parts = gemail | split: "@" %}
         <p class="donor-email-sensor">{{ email_parts[0] | truncate: 5, "" }}@***</p>
+        <p class="donor-amount">Rp {{ gtotal | divided_by: 1000 | append: "K" }}</p>
+        {% if gcount > 1 %}
+        <p class="donor-meta">{{ gcount }}x donasi</p>
         {% endif %}
-        <p class="donor-amount">Rp {{ donor.amount | divided_by: 1000 | append: "K" }}</p>
       </div>
       {% endfor %}
     </div>
