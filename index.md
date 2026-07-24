@@ -147,8 +147,7 @@ permalink: /
           <span class="donor-initial">{{ gname | slice: 0 | upcase }}</span>
         </div>
         <h3 class="donor-name">{{ gname }}</h3>
-        {% assign email_parts = gemail | split: "@" %}
-        <p class="donor-email-sensor">{{ email_parts[0] | truncate: 5, "" }}@***</p>
+        <p class="donor-email-sensor">{{ gemail | truncate: 4, "" }}********</p>
         <p class="donor-amount">Rp {{ gtotal | divided_by: 1000 | append: "K" }}</p>
         {% if gcount > 1 %}
         <p class="donor-meta">{{ gcount }}x donasi</p>
