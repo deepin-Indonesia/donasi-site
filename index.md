@@ -127,9 +127,6 @@ permalink: /
         <p class="donor-email-sensor">{{ email_parts[0] | truncate: 5, "" }}@***</p>
         {% endif %}
         <p class="donor-amount">Rp {{ donor.amount | divided_by: 1000 | append: "K" }}</p>
-        {% if donor.message != "" and donor.message != nil %}
-        <p class="donor-message">"{{ donor.message }}"</p>
-        {% endif %}
       </div>
       {% endfor %}
     </div>
