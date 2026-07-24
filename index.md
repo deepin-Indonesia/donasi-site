@@ -59,12 +59,15 @@ permalink: /
 <section class="donasi-donors">
   <div class="container">
 
+    {% comment %}--- Saring data (skip baris timestamp __TS__) ---{% endcomment %}
+    {% assign donors = site.data.donors | where_exp: "d", "d.name != '__TS__'" %}
+
     {% comment %}--- Hitung donatur anonim ---{% endcomment %}
     {% assign anon_total = 0 %}
     {% assign anon_count = 0 %}
     {% assign all_total = 0 %}
     {% assign all_count = 0 %}
-    {% for d in site.data.donors %}
+    {% for d in donors %}
       {% assign all_total = all_total | plus: d.amount %}
       {% assign all_count = all_count | plus: 1 %}
       {% if d.name == "" or d.name == nil %}
@@ -80,7 +83,7 @@ permalink: /
         Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
       </p>
       <p class="donor-updated-note">
-        <i class="fas fa-sync-alt"></i> Data per {{ site.donor_updated | default: "24 July 2026, 08:50 WIB" }}
+        <i class="fas fa-sync-alt"></i> Data per {% assign ts = site.data.donors | where: "name", "__TS__" | first %}{% if ts %}{{ ts.email }}{% else %}24 July 2026, 08:50 WIB{% endif %}
       </p>
     </div>
 
@@ -100,7 +103,7 @@ permalink: /
     <div class="donor-grid">
       {% comment %}--- Group by email & hitung total ---{% endcomment %}
       {% assign public_donors = "" | split: "" %}
-      {% for d in site.data.donors %}
+      {% for d in donors %}
         {% if d.name != "" and d.name != nil %}
           {% assign public_donors = public_donors | push: d %}
         {% endif %}
@@ -155,7 +158,7 @@ permalink: /
     </div>
 
     <!-- Latest Donors -->
-    {% assign latest = site.data.donors | sort: "date" | reverse %}
+    {% assign latest = donors | sort: "date" | reverse %}
     <div class="section-header" style="margin-top: 3.5rem;">
       <h2><i class="fas fa-clock" style="color: var(--deepin-blue);"></i> Donasi Terbaru</h2>
     </div>
@@ -165,14 +168,14 @@ permalink: /
       {% assign donor_count = 0 %}
       {% assign donor_total = 0 %}
       {% if donor.name != "" and donor.name != nil %}
-        {% for d in site.data.donors %}
+        {% for d in donors %}
           {% if d.email == donor.email and d.email != "" %}
             {% assign donor_count = donor_count | plus: 1 %}
             {% assign donor_total = donor_total | plus: d.amount %}
           {% endif %}
         {% endfor %}
       {% else %}
-        {% for d in site.data.donors %}
+        {% for d in donors %}
           {% if d.name == "" or d.name == nil %}
             {% assign donor_count = donor_count | plus: 1 %}
           {% endif %}
@@ -195,5 +198,6 @@ permalink: /
   </div>
 </section>
 {% endif %}
+
 
 
