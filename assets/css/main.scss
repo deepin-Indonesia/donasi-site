@@ -2023,3 +2023,17 @@ a {
     gap: .75rem;
   }
 }
+
+.donor-anon-banner {
+  justify-content: center;
+  text-align: center;
+}
+
+.donor-updated-note {
+  margin-top: .75rem;
+  font-size: .8rem;
+  color: var(--color-gray-400);
+  font-style: italic;
+
+  i { margin-right: .3rem; }
+}

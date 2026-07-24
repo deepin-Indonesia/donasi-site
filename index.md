@@ -77,6 +77,10 @@ permalink: /
       <h2><i class="fas fa-trophy" style="color: #f59e0b;"></i> Apresiasi Donatur</h2>
       <p class="section-subtitle">
         Total <strong>{{ all_count }}</strong> donasi terkumpul senilai <strong>Rp {{ all_total | divided_by: 1000 | append: "K" }}</strong>.
+        Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
+      </p>
+      <p class="donor-updated-note">
+        <i class="fas fa-sync-alt"></i> Data diperbarui: 24 Juli 2026 — dicatat secara manual oleh admin.
       </p>
     </div>
 
