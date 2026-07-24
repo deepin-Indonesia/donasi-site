@@ -80,7 +80,7 @@ permalink: /
         Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
       </p>
       <p class="donor-updated-note">
-        <i class="fas fa-sync-alt"></i> Data per 24 July 2026, 01:44 WIB · <em>Update via file CSV</em>
+        <i class="fas fa-sync-alt"></i> Data per {{ site.donor_updated | default: "24 July 2026, 08:50 WIB" }}
       </p>
     </div>
 
@@ -161,6 +161,23 @@ permalink: /
     </div>
     <div class="donor-list">
       {% for donor in latest limit:10 %}
+      {% comment %}--- Hitung total donasi dari orang/anonim ini ---{% endcomment %}
+      {% assign donor_count = 0 %}
+      {% assign donor_total = 0 %}
+      {% if donor.name != "" and donor.name != nil %}
+        {% for d in site.data.donors %}
+          {% if d.email == donor.email and d.email != "" %}
+            {% assign donor_count = donor_count | plus: 1 %}
+            {% assign donor_total = donor_total | plus: d.amount %}
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% for d in site.data.donors %}
+          {% if d.name == "" or d.name == nil %}
+            {% assign donor_count = donor_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
       <div class="donor-list-item">
         <span class="donor-list-avatar">
           {% if donor.name != "" and donor.name != nil %}{{ donor.name | slice: 0 | upcase }}{% else %}<i class="fas fa-user-secret"></i>{% endif %}
@@ -168,6 +185,9 @@ permalink: /
         <span class="donor-list-name">{% if donor.name != "" and donor.name != nil %}{{ donor.name }}{% else %}Anonim{% endif %}</span>
         <span class="donor-list-amount">Rp {{ donor.amount | divided_by: 1000 | append: "K" }}</span>
         <span class="donor-list-date">{{ donor.date | date: "%d %b %Y" }}</span>
+        {% if donor_count > 1 and donor.name != "" and donor.name != nil %}
+        <span class="donor-list-count" title="{{ donor_count }}x total donasi">&#10761; {{ donor_count }}x</span>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

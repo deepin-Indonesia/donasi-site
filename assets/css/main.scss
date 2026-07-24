@@ -2043,3 +2043,13 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
+
+.donor-list-count {
+  font-size: .72rem;
+  color: var(--deepin-blue);
+  background: var(--deepin-blue-light);
+  padding: .15rem .5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
