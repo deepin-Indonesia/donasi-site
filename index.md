@@ -29,7 +29,9 @@ permalink: /
           dan pengembangan ekosistem deepin di Indonesia.
         </p>
         <div class="donasi-notes">
-          <p><i class="fas fa-info-circle"></i> Nama, <strong>email</strong>, dan nomor HP bersifat <strong>opsional</strong>. Jika diisi, identitas Anda akan ditampilkan (email disensor). Jika dikosongkan, donasi dianggap <strong>anonim</strong>. Total donasi publik dihitung per email — donasi dari email yang sama akan digabung.</p>
+          <p><i class="fas fa-info-circle"></i> <strong>Nama</strong> dan <strong>email</strong> bersifat opsional — jika diisi akan ditampilkan di halaman ini sebagai bagian dari daftar donatur publik (email akan otomatis disensor: <code>namaxxxxxxxx</code>).</p>
+          <p><i class="fas fa-shield-alt"></i> <strong>Nomor HP</strong> tidak akan pernah ditampilkan secara publik — hanya digunakan Midtrans untuk mengirim notifikasi pembayaran.</p>
+          <p><i class="fas fa-user-secret"></i> Jika nama dikosongkan, donasi akan dicatat sebagai <strong>anonim</strong>. Perhitungan total donasi publik digabung berdasarkan email yang sama.</p>
         </div>
       </div>
       <div class="donasi-card__payment">
