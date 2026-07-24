@@ -29,7 +29,7 @@ permalink: /
           dan pengembangan ekosistem deepin di Indonesia.
         </p>
         <div class="donasi-notes">
-          <p><i class="fas fa-info-circle"></i> <strong>Nama</strong> dan <strong>email</strong> bersifat opsional — jika diisi akan ditampilkan di halaman ini sebagai bagian dari daftar donatur publik.</p>
+          <p><i class="fas fa-info-circle"></i> <strong>Nama</strong> dan <strong>email</strong> bersifat opsional — jika diisi akan ditampilkan di halaman ini sebagai daftar donatur publik. Email akan otomatis disensor (contoh: <code>budi********</code>) sebelum dipublikasikan.</p>
           <p><i class="fas fa-shield-alt"></i> <strong>Nomor HP</strong> tidak akan pernah ditampilkan secara publik.</p>
           <p><i class="fas fa-user-secret"></i> Jika nama dikosongkan, donasi akan dicatat sebagai <strong>anonim</strong>.</p>
           <p><i class="fas fa-calculator"></i> Perhitungan total donasi publik digabung berdasarkan <strong>email yang sama</strong>.</p>
