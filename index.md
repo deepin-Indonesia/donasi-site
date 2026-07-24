@@ -80,7 +80,7 @@ permalink: /
         Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
       </p>
       <p class="donor-updated-note">
-        <i class="fas fa-sync-alt"></i> Data per 24 July 2026, 01:44 WIB
+        <i class="fas fa-sync-alt"></i> Data per 24 July 2026, 01:44 WIB · <em>Update via file CSV</em>
       </p>
     </div>
 

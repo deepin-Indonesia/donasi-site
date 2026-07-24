@@ -1,0 +1,2 @@
+# CSV files should use LF line endings
+*.csv text eol=lf
