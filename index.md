@@ -29,7 +29,7 @@ permalink: /
           dan pengembangan ekosistem deepin di Indonesia.
         </p>
         <div class="donasi-notes">
-          <p><i class="fas fa-info-circle"></i> Nama, <strong>email</strong>, dan nomor HP bersifat <strong>opsional</strong>. Jika diisi, identitas Anda akan ditampilkan bersama donasi (email akan disensor). Jika dikosongkan, donasi dianggap <strong>anonim</strong>.</p>
+          <p><i class="fas fa-info-circle"></i> Nama, <strong>email</strong>, dan nomor HP bersifat <strong>opsional</strong>. Jika diisi, identitas Anda akan ditampilkan (email disensor). Jika dikosongkan, donasi dianggap <strong>anonim</strong>. Total donasi publik dihitung per email — donasi dari email yang sama akan digabung.</p>
         </div>
       </div>
       <div class="donasi-card__payment">
@@ -80,7 +80,7 @@ permalink: /
         Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
       </p>
       <p class="donor-updated-note">
-        <i class="fas fa-sync-alt"></i> Data diperbarui: 24 Juli 2026 — dicatat secara manual oleh admin.
+        <i class="fas fa-sync-alt"></i> Data per {{ "now" | date: "%d %B %Y, %H:%M WIB" }} — dicatat manual oleh admin. Data di bawah ini adalah akumulasi sejak halaman donasi dibuat.
       </p>
     </div>
 
@@ -140,9 +140,9 @@ permalink: /
       {% for donor in latest limit:10 %}
       <div class="donor-list-item">
         <span class="donor-list-avatar">
-          {% if donor.name %}{{ donor.name | slice: 0 | upcase }}{% else %}<i class="fas fa-user-secret"></i>{% endif %}
+          {% if donor.name != "" and donor.name != nil %}{{ donor.name | slice: 0 | upcase }}{% else %}<i class="fas fa-user-secret"></i>{% endif %}
         </span>
-        <span class="donor-list-name">{% if donor.name %}{{ donor.name }}{% else %}Anonim{% endif %}</span>
+        <span class="donor-list-name">{% if donor.name != "" and donor.name != nil %}{{ donor.name }}{% else %}Anonim{% endif %}</span>
         <span class="donor-list-amount">Rp {{ donor.amount | divided_by: 1000 | append: "K" }}</span>
         <span class="donor-list-date">{{ donor.date | date: "%d %b %Y" }}</span>
       </div>
