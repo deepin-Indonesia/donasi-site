@@ -1,27 +1,53 @@
 # Data Donatur — Update manual setelah ada donasi baru
-# Format: name, amount (dalam Rupiah), date, message
+# Format: name (kosongkan untuk anonim), amount (Rupiah), date (YYYY-MM-DD), message
 
 - name: "Budi Santoso"
   amount: 500000
   date: 2026-07-20
-  message: "Semangat terus deepin Indonesia!"
+  message: "Semangat terus deepin Indonesia! Keren banget komunitasnya."
 
 - name: "Siti Rahayu"
-  amount: 250000
+  amount: 350000
   date: 2026-07-18
-  message: "Terima kasih sudah membuat deepin lebih mudah diakses"
+  message: "Terima kasih sudah membuat deepin lebih mudah diakses."
+
+- name: "Andi Pratama"
+  amount: 250000
+  date: 2026-07-15
+  message: "Pakai deepin sejak 2020, lancar terus!"
+
+- name: ""
+  amount: 200000
+  date: 2026-07-22
+  message: ""
+
+- name: "Dian Permata"
+  amount: 150000
+  date: 2026-07-21
+  message: "Donasi kecil, semoga bermanfaat."
+
+- name: "Rizky Fauzi"
+  amount: 100000
+  date: 2026-07-19
+  message: ""
 
 - name: ""
   amount: 100000
-  date: 2026-07-15
-  message: ""
+  date: 2026-07-17
+  message: "Keep up the good work!"
 
-- name: "Andi Pratama"
+- name: "Maya Indah"
   amount: 75000
-  date: 2026-07-12
-  message: "Semoga deepin makin berkembang!"
+  date: 2026-07-16
+  message: ""
 
 - name: ""
   amount: 50000
-  date: 2026-07-10
-  message: "Donasi kecil untuk komunitas"
+  date: 2026-07-14
+  message: "Sukses selalu!"
+
+- name: "Hendra Gunawan"
+  amount: 50000
+  date: 2026-07-12
+  message: ""
+
