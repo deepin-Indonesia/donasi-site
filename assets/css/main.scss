@@ -1933,24 +1933,66 @@ a {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
 
-  iframe {
-    display: block;
-    width: 100%;
-    min-height: 550px;
+/* CTA Button */
+.donasi-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, var(--deepin-blue), var(--deepin-blue-dark));
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(26, 109, 212, .35);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(26, 109, 212, .45);
+    color: #fff;
   }
 }
 
-.donasi-direct-link {
-  margin-top: .75rem;
-  text-align: center;
-  font-size: .82rem;
+.donasi-cta-icon {
+  font-size: 1.5rem;
+  background: rgba(255,255,255,.2);
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.donasi-cta-text {
+  text-align: left;
+  line-height: 1.3;
+
+  strong { display: block; font-size: 1.1rem; }
+  small { font-size: .78rem; opacity: .8; }
+}
+
+.donasi-cta-arrow {
+  font-size: .85rem;
+  opacity: .6;
+  flex-shrink: 0;
+}
+
+/* Payment Methods */
+.donasi-payment-methods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 1.25rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-gray-100);
+  font-size: .78rem;
   color: var(--color-gray-400);
 
-  a {
-    color: var(--deepin-blue);
-    font-weight: 500;
-  }
+  i { margin-right: .3rem; color: var(--color-gray-300); }
 }
 
 /* ===== Donors Section ===== */
@@ -1969,8 +2011,11 @@ a {
     position: static;
   }
 
-  .donasi-payment-wrapper iframe {
-    min-height: 480px;
+  .donasi-cta-button {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+    .donasi-cta-text { text-align: center; }
   }
 
   .donasi-card__info h2 {
