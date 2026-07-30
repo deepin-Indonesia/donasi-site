@@ -85,7 +85,7 @@ permalink: /
     <div class="section-header">
       <h2><i class="fas fa-trophy" style="color: #f59e0b;"></i> Apresiasi Donatur</h2>
       <p class="section-subtitle">
-        Total <strong>{{ all_count }}</strong> donasi terkumpul senilai <strong>Rp {{ all_total | divided_by: 1000 | append: "K" }}</strong>.
+        Total <strong>{{ all_count }}</strong> donasi terkumpul senilai <strong>Rp {{ all_total | format_rupiah }}</strong>.
         Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
       </p>
       <p class="donor-updated-note">
@@ -101,7 +101,7 @@ permalink: /
       </div>
       <div class="donor-anon-banner__info">
         <h3>Donatur Anonim</h3>
-        <p>{{ anon_count }} donasi &middot; total <strong>Rp {{ anon_total | divided_by: 1000 | append: "K" }}</strong></p>
+        <p>{{ anon_count }} donasi &middot; total <strong>Rp {{ anon_total | format_rupiah }}</strong></p>
       </div>
     </div>
     {% endif %}
@@ -154,7 +154,7 @@ permalink: /
         </div>
         <h3 class="donor-name">{{ gname }}</h3>
         <p class="donor-email-sensor">{{ gemail | truncate: 4, "" }}********</p>
-        <p class="donor-amount">Rp {{ gtotal | divided_by: 1000 | append: "K" }}</p>
+        <p class="donor-amount">Rp {{ gtotal | format_rupiah }}</p>
         {% if gcount > 1 %}
         <p class="donor-meta">{{ gcount }}x donasi</p>
         {% endif %}
@@ -191,7 +191,7 @@ permalink: /
           {% if donor.name != "" and donor.name != nil %}{{ donor.name | slice: 0 | upcase }}{% else %}<i class="fas fa-user-secret"></i>{% endif %}
         </span>
         <span class="donor-list-name">{% if donor.name != "" and donor.name != nil %}{{ donor.name }}{% else %}Anonim{% endif %}</span>
-        <span class="donor-list-amount">Rp {{ donor.amount | divided_by: 1000 | append: "K" }}</span>
+        <span class="donor-list-amount">Rp {{ donor.amount | format_rupiah }}</span>
         <span class="donor-list-date">{{ donor.date | date: "%d %b %Y" }}</span>
         {% if donor_count > 1 and donor.name != "" and donor.name != nil %}
         <span class="donor-list-count" title="{{ donor_count }}x total donasi">&#10761; {{ donor_count }}x</span>
