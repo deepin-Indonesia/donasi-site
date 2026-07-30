@@ -34,13 +34,6 @@ permalink: /
           <p><i class="fas fa-user-secret"></i> Jika nama dikosongkan, donasi akan dicatat sebagai <strong>anonim</strong>.</p>
           <p><i class="fas fa-calculator"></i> Perhitungan total donasi publik digabung berdasarkan <strong>email yang sama</strong>.</p>
         </div>
-        <div class="donasi-other">
-          <h3><i class="fas fa-hand-holding-heart"></i> Ingin berdonasi dalam bentuk lain?</h3>
-          <p>
-            Kami juga menerima donasi dalam bentuk <strong>server</strong>, <strong>merchandise</strong>, <strong>sponsorship event</strong>, dan lainnya.
-            Hubungi kami di <a href="mailto:deepin@siberin.id"><strong>deepin@siberin.id</strong></a>
-          </p>
-        </div>
       </div>
       <div class="donasi-card__payment">
         <div class="donasi-payment-wrapper">
@@ -58,6 +51,26 @@ permalink: /
         <p class="donasi-direct-link">
           <i class="fas fa-external-link-alt"></i> 
           Tidak bisa memuat form? <a href="https://app.midtrans.com/payment-links/Donasi-deepin-Indonesia-qSHW6Bup" target="_blank" rel="noopener">Buka di tab baru</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Other Donation Section -->
+<section class="donasi-other-section">
+  <div class="container">
+    <div class="donasi-other">
+      <div class="donasi-other__icon">
+        <i class="fas fa-hand-holding-heart"></i>
+      </div>
+      <div class="donasi-other__text">
+        <h3>Bentuk Donasi Lainnya</h3>
+        <p>
+          Selain donasi tunai melalui Midtrans, kami juga terbuka untuk kerja sama dan dukungan dalam bentuk 
+          <strong>server</strong>, <strong>merchandise</strong>, <strong>sponsorship event</strong>, 
+          <strong>domain</strong>, <strong>VPS</strong>, dan lainnya.
+          Hubungi kami di <a href="mailto:deepin@siberin.id"><strong>deepin@siberin.id</strong></a>
         </p>
       </div>
     </div>
