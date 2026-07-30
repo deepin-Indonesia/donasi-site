@@ -194,7 +194,7 @@ permalink: /
         <span class="donor-list-amount">Rp {{ donor.amount | format_rupiah }}</span>
         <span class="donor-list-date">{{ donor.date | date: "%d %b %Y" }}</span>
         {% if donor_count > 1 and donor.name != "" and donor.name != nil %}
-        <span class="donor-list-count" title="{{ donor_count }}x total donasi">&#10761; {{ donor_count }}x</span>
+        <span class="donor-list-count" title="Total {{ donor_count }} kali donasi">{{ donor_count }}&times;</span>
         {% endif %}
       </div>
       {% endfor %}

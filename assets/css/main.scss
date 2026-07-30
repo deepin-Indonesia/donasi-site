@@ -2064,11 +2064,12 @@ a {
 }
 
 .donor-list-count {
-  font-size: .72rem;
-  color: var(--deepin-blue);
-  background: var(--deepin-blue-light);
-  padding: .15rem .5rem;
+  font-size: .7rem;
+  color: var(--color-gray-500);
+  background: var(--color-gray-100);
+  padding: .1rem .45rem;
   border-radius: 50px;
   font-weight: 600;
   flex-shrink: 0;
+  letter-spacing: .02em;
 }
