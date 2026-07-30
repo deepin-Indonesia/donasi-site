@@ -63,13 +63,13 @@ def censor_email(email: str) -> str:
 
 
 def donor_id(email: str) -> str:
-    """Buat ID unik dari email via HMAC-SHA256 — impossible to reverse tanpa secret key."""
+    """Buat ID unik dari email via HMAC-SHA512 — impossible to reverse tanpa secret key."""
     global SECRET_KEY
     if not email or email.strip() == "":
         return ""
     if SECRET_KEY is None:
         SECRET_KEY = get_secret_key()
-    return hmac.new(SECRET_KEY, email.strip().lower().encode(), hashlib.sha256).hexdigest()[:12]
+    return hmac.new(SECRET_KEY, email.strip().lower().encode(), hashlib.sha512).hexdigest()[:12]
 
 
 def generate():
