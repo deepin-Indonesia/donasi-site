@@ -1,13 +1,10 @@
-# Netlify configuration — Preview + Production deploy untuk donasi.deepin.id
-# Repository PRIVATE — semuanya deploy via Netlify
+# Netlify configuration — donasi.deepin.id
+# Repository PRIVATE — dibuild via GitHub Actions, dideploy ke Netlify via CLI
+# Build section diabaikan Netlify (build via GHA), redirects & headers tetap diproses
 
 [build]
-  command = "echo 'url: \"'$DEPLOY_PRIME_URL'\"' > _config_netlify.yml && bundle exec jekyll build --config _config.yml,_config_netlify.yml"
+  command = "echo 'Build dilakukan via GitHub Actions (.github/workflows/deploy.yml)'"
   publish = "_site"
-
-[build.environment]
-  JEKYLL_ENV = "production"
-  RUBY_VERSION = "3.3"
 
 # === SECURITY: Blokir akses CSV / data mentah ===
 # Semua file .csv dan path _data/ dikembalikan 404

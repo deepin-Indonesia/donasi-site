@@ -58,7 +58,7 @@ donasi-site/
    - **date**: Tanggal donasi (`YYYY-MM-DD`)
    - Baris `__TS__` otomatis ditambahkan sebagai timestamp
 
-3. Commit & push → Netlify auto-deploy
+3. Commit & push → GitHub Actions build + deploy ke Netlify otomatis
 
 ---
 
@@ -75,12 +75,32 @@ Data donatur (`_data/donors.csv`) **tidak bisa diakses publik** melalui website.
 
 > ⚠️ Email di dalam CSV **tetap harus disensor** sebelum commit — sebagai pertahanan terakhir.
 
-| Environment | Branch | URL |
-|---|---|---|
-| **Production** | `main` | [donasi.deepin.id](https://donasi.deepin.id) |
-| **Preview** | PR / branch lain | Netlify Deploy Preview |
+---
 
-Keduanya dideploy via **Netlify**.
+## Deploy
+
+> ⚠️ Netlify build service **tidak support** private organization repository tanpa Pro.
+> Solusi: **build via GitHub Actions**, lalu deploy hasil build ke Netlify via CLI.
+
+| Environment | Branch | Trigger |
+|---|---|---|
+| **Production** | `main` | Push → GitHub Actions → Netlify prod |
+| **Preview** | `preview` / PR | Push → GitHub Actions → Netlify branch deploy |
+
+Workflow: `.github/workflows/deploy.yml`
+
+### Setup Secrets (sekali saja)
+
+1. Buka **Netlify** → User Settings → Applications → [Personal access tokens](https://app.netlify.com/user/applications#personal-access-tokens) → buat token
+2. Buka **Netlify** → Site Settings → Site details → copy **Site ID**
+3. Buka **GitHub repo** → Settings → Secrets & Variables → Actions → tambah:
+
+   | Secret | Value |
+   |---|---|
+   | `NETLIFY_AUTH_TOKEN` | Personal access token dari Netlify |
+   | `NETLIFY_SITE_ID` | Site ID dari Netlify (contoh: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`) |
+
+4. **Disable Netlify auto-build**: Netlify → Site Settings → Build & deploy → Build settings → **Stop builds** (supaya tidak build dua kali)
 
 ---
 
