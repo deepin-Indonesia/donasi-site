@@ -9,3 +9,6 @@ node_modules/
 Thumbs.db
 .netlify/
 _config_netlify.yml
+
+# Data privat — TIDAK BOLEH di-commit!
+tools/donors_private.csv

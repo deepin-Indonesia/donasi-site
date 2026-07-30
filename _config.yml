@@ -1,7 +1,7 @@
 # deepin Indonesia — Donasi Site
 # Domain: donasi.deepin.id
 # Deploy: Netlify (preview & main)
-# Repository: PRIVATE — CSV donatur diupload langsung, email sudah disensor
+# Repository: PUBLIC — email disensor via tools/generate_donors.py sebelum commit
 
 title: "Donasi deepin Indonesia"
 tagline: "Dukung Komunitas deepin Indonesia"
@@ -37,7 +37,5 @@ exclude:
   - .gitmodules
   - vendor
   - node_modules
-  - "*.csv"
-  - _data/
   - tools/
   - donors_private.csv
