@@ -1933,51 +1933,62 @@ a {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  padding: 2rem 1.5rem;
   text-align: center;
+}
+
+.donasi-payment-header {
+  background: linear-gradient(135deg, var(--deepin-blue), #0d5bb8);
+  padding: 1.25rem 1.5rem;
+  color: #fff;
+
+  .donasi-payment-header__icon {
+    font-size: 2rem;
+    margin-bottom: .35rem;
+    opacity: .9;
+  }
+
+  p {
+    margin: 0;
+    font-size: .82rem;
+    opacity: .75;
+  }
+}
+
+.donasi-payment-body {
+  padding: 1.75rem 1.5rem;
 }
 
 /* CTA Button */
 .donasi-cta-button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 1rem;
-  background: linear-gradient(135deg, var(--deepin-blue), var(--deepin-blue-dark));
+  justify-content: center;
+  gap: .85rem;
+  width: 100%;
+  background: linear-gradient(135deg, #e63946, #c1121f);
   color: #fff;
-  padding: 1rem 2rem;
-  border-radius: var(--radius-lg);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
   text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 700;
   transition: transform .2s, box-shadow .2s;
-  box-shadow: 0 4px 20px rgba(26, 109, 212, .35);
+  box-shadow: 0 4px 20px rgba(230, 57, 70, .3);
+
+  i { font-size: 1.1rem; }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(26, 109, 212, .45);
+    box-shadow: 0 6px 28px rgba(230, 57, 70, .4);
     color: #fff;
   }
 }
 
-.donasi-cta-icon {
-  font-size: 1.5rem;
-  background: rgba(255,255,255,.2);
-  width: 48px; height: 48px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.donasi-cta-text {
-  text-align: left;
-  line-height: 1.3;
-
-  strong { display: block; font-size: 1.1rem; }
-  small { font-size: .78rem; opacity: .8; }
-}
-
-.donasi-cta-arrow {
-  font-size: .85rem;
-  opacity: .6;
-  flex-shrink: 0;
+.donasi-cta-sub {
+  margin-top: .6rem;
+  font-size: .75rem;
+  color: var(--color-gray-400);
+  i { margin: 0 .25rem; color: var(--color-green); }
 }
 
 /* Payment Methods */
@@ -1985,14 +1996,24 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: .5rem 1.25rem;
-  margin-top: 1.25rem;
+  gap: .4rem .9rem;
+  margin-top: 1.35rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--color-gray-100);
-  font-size: .78rem;
+  font-size: .76rem;
   color: var(--color-gray-400);
 
-  i { margin-right: .3rem; color: var(--color-gray-300); }
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    background: var(--color-gray-50);
+    padding: .3rem .65rem;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+
+  i { font-size: .85rem; color: var(--color-gray-400); }
 }
 
 /* ===== Donors Section ===== */
@@ -2011,11 +2032,8 @@ a {
     position: static;
   }
 
-  .donasi-cta-button {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.25rem;
-    .donasi-cta-text { text-align: center; }
+  .donasi-payment-header {
+    padding: 1rem;
   }
 
   .donasi-card__info h2 {

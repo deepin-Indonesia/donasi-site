@@ -40,21 +40,23 @@ permalink: /
       </div>
       <div class="donasi-card__payment">
         <div class="donasi-payment-wrapper">
-          <a href="https://app.midtrans.com/payment-links/Donasi-deepin-Indonesia-qSHW6Bup"
-             target="_blank" rel="noopener"
-             class="donasi-cta-button">
-            <span class="donasi-cta-icon"><i class="fas fa-heart"></i></span>
-            <span class="donasi-cta-text">
-              <strong>Donasi Sekarang</strong>
-              <small>via Midtrans — Aman &amp; Terpercaya</small>
-            </span>
-            <span class="donasi-cta-arrow"><i class="fas fa-external-link-alt"></i></span>
-          </a>
-          <div class="donasi-payment-methods">
-            <span><i class="fas fa-university"></i> Bank Transfer</span>
-            <span><i class="fas fa-mobile-alt"></i> GoPay</span>
-            <span><i class="fas fa-store"></i> Indomaret</span>
-            <span><i class="fas fa-qrcode"></i> QRIS</span>
+          <div class="donasi-payment-header">
+            <div class="donasi-payment-header__icon">💝</div>
+            <p>Pilih nominal sesuka hati — tidak ada minimal</p>
+          </div>
+          <div class="donasi-payment-body">
+            <a href="https://app.midtrans.com/payment-links/Donasi-deepin-Indonesia-qSHW6Bup"
+               target="_blank" rel="noopener"
+               class="donasi-cta-button">
+              <i class="fas fa-heart"></i> Donasi Sekarang via Midtrans <i class="fas fa-external-link-alt"></i>
+            </a>
+            <p class="donasi-cta-sub"><i class="fas fa-lock"></i> Pembayaran aman <i class="fas fa-shield-alt"></i> terenkripsi</p>
+            <div class="donasi-payment-methods">
+              <span><i class="fas fa-university"></i> Bank Transfer</span>
+              <span><i class="fas fa-mobile-alt"></i> GoPay</span>
+              <span><i class="fas fa-store"></i> Indomaret</span>
+              <span><i class="fas fa-qrcode"></i> QRIS</span>
+            </div>
           </div>
         </div>
       </div>
