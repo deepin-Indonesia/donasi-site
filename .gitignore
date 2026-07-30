@@ -12,3 +12,4 @@ _config_netlify.yml
 
 # Data privat — TIDAK BOLEH di-commit!
 tools/donors_private.csv
+tools/.secret_key

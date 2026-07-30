@@ -13,19 +13,46 @@ Format donors_private.csv:
 Output donors.csv:
   name,email,donor_id,amount,date
   - email: 4 karakter pertama + ******** (disensor)
-  - donor_id: hash unik dari email asli → untuk grouping donasi tanpa tabrakan
+  - donor_id: HMAC-SHA256(email, secret_key) → impossible to reverse
   - No HP dihapus
 """
 
 import csv
 import hashlib
+import hmac
 import os
+import secrets
 from datetime import datetime
 
 # ---- CONFIG ----
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE  = os.path.join(SCRIPT_DIR, "donors_private.csv")
 OUTPUT_FILE = os.path.join(SCRIPT_DIR, "..", "_data", "donors.csv")
+SECRET_FILE = os.path.join(SCRIPT_DIR, ".secret_key")
+
+
+def get_secret_key() -> bytes:
+    """Ambil atau buat secret key untuk HMAC.
+    Prioritas: env var → file .secret_key → generate baru.
+    Key TIDAK PERNAH di-commit (ada di .gitignore)."""
+    env_key = os.environ.get("DONOR_SECRET_KEY")
+    if env_key:
+        return env_key.encode()
+
+    if os.path.exists(SECRET_FILE):
+        with open(SECRET_FILE, "rb") as f:
+            return f.read()
+
+    # Generate key baru
+    key = secrets.token_bytes(32)
+    with open(SECRET_FILE, "wb") as f:
+        f.write(key)
+    print(f"🔑 Secret key baru dibuat: {SECRET_FILE}")
+    print("   ⚠️  Simpan file ini! Tanpa key ini, donor_id tidak bisa direproduksi.")
+    return key
+
+
+SECRET_KEY = None  # lazy init
 
 
 def censor_email(email: str) -> str:
@@ -36,10 +63,13 @@ def censor_email(email: str) -> str:
 
 
 def donor_id(email: str) -> str:
-    """Buat ID unik dari email — 8 karakter hex. Satu email = satu ID, tidak akan tabrakan."""
+    """Buat ID unik dari email via HMAC-SHA256 — impossible to reverse tanpa secret key."""
+    global SECRET_KEY
     if not email or email.strip() == "":
         return ""
-    return hashlib.md5(email.strip().lower().encode()).hexdigest()[:8]
+    if SECRET_KEY is None:
+        SECRET_KEY = get_secret_key()
+    return hmac.new(SECRET_KEY, email.strip().lower().encode(), hashlib.sha256).hexdigest()[:12]
 
 
 def generate():

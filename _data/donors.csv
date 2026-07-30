@@ -1,39 +1,39 @@
 name,email,donor_id,amount,date
-[DUMMY] Budi Santoso,budi********,3b27a893,100000,2026-07-01
-[DUMMY] Siti Rahayu,siti********,9666ec5a,150000,2026-07-01
+[DUMMY] Budi Santoso,budi********,8bc9d4c61106,100000,2026-07-01
+[DUMMY] Siti Rahayu,siti********,f9963c3848ee,150000,2026-07-01
 ,,,50000,2026-07-02
-[DUMMY] Andi Pratama,andi********,4b30e236,250000,2026-07-03
-[DUMMY] Maya Indah,maya********,f5bb3931,75000,2026-07-03
-[DUMMY] Rizky Fauzi,rizk********,3cea59bf,100000,2026-07-03
+[DUMMY] Andi Pratama,andi********,b13f599ad3f3,250000,2026-07-03
+[DUMMY] Maya Indah,maya********,d853125f1d67,75000,2026-07-03
+[DUMMY] Rizky Fauzi,rizk********,8b6ed3406a29,100000,2026-07-03
 ,,,200000,2026-07-04
-[DUMMY] Dian Permata,dian********,ad6d4a08,150000,2026-07-05
-[DUMMY] Hendra Gunawan,hend********,a85c3eb6,50000,2026-07-05
-[DUMMY] Budi Santoso,budi********,3b27a893,500000,2026-07-06
-[DUMMY] Putri Amelia,putr********,ebaf2d4c,175000,2026-07-07
+[DUMMY] Dian Permata,dian********,6b016b315ac5,150000,2026-07-05
+[DUMMY] Hendra Gunawan,hend********,0790ba68f7bf,50000,2026-07-05
+[DUMMY] Budi Santoso,budi********,8bc9d4c61106,500000,2026-07-06
+[DUMMY] Putri Amelia,putr********,1a9cb2c75f1f,175000,2026-07-07
 ,,,100000,2026-07-07
-[DUMMY] Siti Rahayu,siti********,9666ec5a,350000,2026-07-08
-[DUMMY] Ahmad Fauzan,ahma********,c6ad0501,200000,2026-07-09
-[DUMMY] Rina Marlina,rina********,43ead267,125000,2026-07-10
+[DUMMY] Siti Rahayu,siti********,f9963c3848ee,350000,2026-07-08
+[DUMMY] Ahmad Fauzan,ahma********,14bd3710129b,200000,2026-07-09
+[DUMMY] Rina Marlina,rina********,72fc7aee2380,125000,2026-07-10
 ,,,150000,2026-07-10
-[DUMMY] Dian Permata,dian********,ad6d4a08,300000,2026-07-12
-[DUMMY] Yoga Prasetya,yoga********,00227f34,180000,2026-07-13
-[DUMMY] Budi Santoso,budi********,3b27a893,75000,2026-07-14
-[DUMMY] Nurul Hidayah,nuru********,566d0b94,225000,2026-07-15
+[DUMMY] Dian Permata,dian********,6b016b315ac5,300000,2026-07-12
+[DUMMY] Yoga Prasetya,yoga********,65336c93f9bd,180000,2026-07-13
+[DUMMY] Budi Santoso,budi********,8bc9d4c61106,75000,2026-07-14
+[DUMMY] Nurul Hidayah,nuru********,21be880e0294,225000,2026-07-15
 ,,,75000,2026-07-15
-[DUMMY] Andi Pratama,andi********,4b30e236,400000,2026-07-16
-[DUMMY] Siska Wulandari,sisk********,aead5602,95000,2026-07-17
-[DUMMY] Maya Indah,maya********,f5bb3931,150000,2026-07-18
+[DUMMY] Andi Pratama,andi********,b13f599ad3f3,400000,2026-07-16
+[DUMMY] Siska Wulandari,sisk********,cecdc7a32f5a,95000,2026-07-17
+[DUMMY] Maya Indah,maya********,d853125f1d67,150000,2026-07-18
 ,,,300000,2026-07-19
-[DUMMY] Rizky Fauzi,rizk********,3cea59bf,250000,2026-07-20
-[DUMMY] Kartika Dewi,kart********,fae27124,135000,2026-07-20
-[DUMMY] Hendra Gunawan,hend********,a85c3eb6,200000,2026-07-22
-[DUMMY] Putri Amelia,putr********,ebaf2d4c,325000,2026-07-23
+[DUMMY] Rizky Fauzi,rizk********,8b6ed3406a29,250000,2026-07-20
+[DUMMY] Kartika Dewi,kart********,fefcd3dadddd,135000,2026-07-20
+[DUMMY] Hendra Gunawan,hend********,0790ba68f7bf,200000,2026-07-22
+[DUMMY] Putri Amelia,putr********,1a9cb2c75f1f,325000,2026-07-23
 ,,,50000,2026-07-23
-[DUMMY] Dimas Ardiansyah,dima********,1ec63db1,160000,2026-07-24
-[DUMMY] Siti Rahayu,siti********,9666ec5a,275000,2026-07-25
-[DUMMY] Ahmad Fauzan,ahma********,c6ad0501,100000,2026-07-26
+[DUMMY] Dimas Ardiansyah,dima********,a92896451e1d,160000,2026-07-24
+[DUMMY] Siti Rahayu,siti********,f9963c3848ee,275000,2026-07-25
+[DUMMY] Ahmad Fauzan,ahma********,14bd3710129b,100000,2026-07-26
 ,,,175000,2026-07-27
-[DUMMY] Budi Santoso,budi********,3b27a893,200000,2026-07-28
-[DUMMY] Rina Marlina,rina********,43ead267,310000,2026-07-29
-[DUMMY] Yoga Prasetya,yoga********,00227f34,50000,2026-07-30
-__TS__,"30 July 2026, 12:06 WIB",,,
+[DUMMY] Budi Santoso,budi********,8bc9d4c61106,200000,2026-07-28
+[DUMMY] Rina Marlina,rina********,72fc7aee2380,310000,2026-07-29
+[DUMMY] Yoga Prasetya,yoga********,65336c93f9bd,50000,2026-07-30
+__TS__,"30 July 2026, 12:08 WIB",,,
