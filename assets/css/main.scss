@@ -1903,64 +1903,23 @@ a {
   i { margin-right: .4rem; }
 }
 
-/* ===== Other Donation Section ===== */
-.donasi-other-section {
-  padding: 0 0 2rem;
-  background: var(--color-gray-50);
-}
-
 .donasi-other {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  margin-top: .75rem;
   background: linear-gradient(135deg, #eff6ff, #dbeafe);
   border: 1px solid #93c5fd;
-  border-radius: var(--radius-lg);
-  padding: 1.25rem 1.5rem;
-}
+  border-radius: var(--radius-md);
+  padding: .7rem 1rem;
+  font-size: .85rem;
+  color: var(--deepin-blue-dark);
+  line-height: 1.6;
 
-.donasi-other__icon {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  background: var(--deepin-blue);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  i {
-    color: #fff;
-    font-size: 1.1rem;
-  }
-}
-
-.donasi-other__text {
-  h3 {
-    font-size: .95rem;
-    font-weight: 700;
-    color: var(--color-gray-800);
-    margin: 0 0 .3rem;
-  }
-
-  p {
-    margin: 0;
-    font-size: .88rem;
-    color: var(--color-gray-500);
-    line-height: 1.65;
-    strong { color: var(--color-gray-700); }
-  }
+  i { margin-right: .4rem; color: var(--deepin-blue); }
 
   a {
     color: var(--deepin-blue);
     font-weight: 600;
     &:hover { text-decoration: underline; }
   }
-}
-
-@media (max-width: 768px) {
-  .donasi-other { flex-direction: column; align-items: center; text-align: center; }
-  .donasi-other__text h3 { font-size: .9rem; }
 }
 
 .donasi-card__payment {
