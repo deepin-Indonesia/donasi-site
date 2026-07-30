@@ -1903,6 +1903,32 @@ a {
   i { margin-right: .4rem; }
 }
 
+.donasi-other {
+  margin-top: .75rem;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1px solid #f59e0b;
+  border-radius: var(--radius-md);
+  padding: .85rem 1rem;
+  font-size: .85rem;
+  color: #92400e;
+  line-height: 1.6;
+
+  h3 {
+    font-size: .9rem;
+    margin: 0 0 .35rem;
+    color: #92400e;
+    i { margin-right: .4rem; }
+  }
+
+  p { margin: 0; }
+
+  a {
+    color: #92400e;
+    text-decoration: underline;
+    &:hover { color: #78350f; }
+  }
+}
+
 .donasi-card__payment {
   position: sticky;
   top: 90px;

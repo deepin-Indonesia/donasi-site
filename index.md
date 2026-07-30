@@ -34,6 +34,13 @@ permalink: /
           <p><i class="fas fa-user-secret"></i> Jika nama dikosongkan, donasi akan dicatat sebagai <strong>anonim</strong>.</p>
           <p><i class="fas fa-calculator"></i> Perhitungan total donasi publik digabung berdasarkan <strong>email yang sama</strong>.</p>
         </div>
+        <div class="donasi-other">
+          <h3><i class="fas fa-hand-holding-heart"></i> Ingin berdonasi dalam bentuk lain?</h3>
+          <p>
+            Kami juga menerima donasi dalam bentuk <strong>server</strong>, <strong>merchandise</strong>, <strong>sponsorship event</strong>, dan lainnya.
+            Hubungi kami di <a href="mailto:deepin@siberin.id"><strong>deepin@siberin.id</strong></a>
+          </p>
+        </div>
       </div>
       <div class="donasi-card__payment">
         <div class="donasi-payment-wrapper">
