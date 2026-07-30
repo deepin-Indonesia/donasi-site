@@ -86,7 +86,7 @@ permalink: /
       <h2><i class="fas fa-trophy" style="color: #f59e0b;"></i> Apresiasi Donatur</h2>
       <p class="section-subtitle">
         Total <strong>{{ all_count }}</strong> donasi terkumpul senilai <strong>Rp {{ all_total | format_rupiah }}</strong>.
-        Perhitungan donasi publik digabung berdasarkan <strong>email yang sama</strong> — jika satu email donasi beberapa kali, jumlahnya akan ditotal.
+        Perhitungan donasi publik digabung berdasarkan <strong>donatur yang sama</strong> — jika satu orang donasi beberapa kali, jumlahnya akan ditotal.
       </p>
       <p class="donor-updated-note">
         <i class="fas fa-sync-alt"></i> Data per {% assign ts = site.data.donors | where: "name", "__TS__" | first %}{% if ts %}{{ ts.email }}{% else %}24 July 2026, 08:50 WIB{% endif %}
@@ -107,7 +107,7 @@ permalink: /
     {% endif %}
 
     <div class="donor-grid">
-      {% comment %}--- Group by email & hitung total ---{% endcomment %}
+      {% comment %}--- Group by donor_id & hitung total ---{% endcomment %}
       {% assign public_donors = "" | split: "" %}
       {% for d in donors %}
         {% if d.name != "" and d.name != nil %}
@@ -115,7 +115,7 @@ permalink: /
         {% endif %}
       {% endfor %}
 
-      {% assign grouped = public_donors | group_by: "email" %}
+      {% assign grouped = public_donors | group_by: "donor_id" %}
       {% assign top_groups = "" | split: "" %}
       {% for g in grouped %}
         {% if g.name != "" and g.name != nil %}
@@ -174,7 +174,7 @@ permalink: /
       {% assign donor_total = 0 %}
       {% if donor.name != "" and donor.name != nil %}
         {% for d in donors %}
-          {% if d.email == donor.email and d.email != "" %}
+          {% if d.donor_id == donor.donor_id and d.donor_id != "" %}
             {% assign donor_count = donor_count | plus: 1 %}
             {% assign donor_total = donor_total | plus: d.amount %}
           {% endif %}
