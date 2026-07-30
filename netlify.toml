@@ -1,5 +1,5 @@
-# Netlify configuration — Preview deploy untuk donasi.deepin.id
-# Production (main branch) menggunakan GitHub Pages
+# Netlify configuration — Preview + Production deploy untuk donasi.deepin.id
+# Repository PRIVATE — semuanya deploy via Netlify
 
 [build]
   command = "echo 'url: \"'$DEPLOY_PRIME_URL'\"' > _config_netlify.yml && bundle exec jekyll build --config _config.yml,_config_netlify.yml"
@@ -8,3 +8,39 @@
 [build.environment]
   JEKYLL_ENV = "production"
   RUBY_VERSION = "3.3"
+
+# === SECURITY: Blokir akses CSV / data mentah ===
+# Semua file .csv dan path _data/ dikembalikan 404
+
+[[redirects]]
+  from = "/data/*"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/_data/*"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/*.csv"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/donors*"
+  to = "/404.html"
+  status = 404
+
+# === Security Headers ===
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
