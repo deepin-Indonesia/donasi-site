@@ -1,9 +1,5 @@
 # Donasi deepin Indonesia
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/REPLACE_ME/deploy-status)](https://app.netlify.com/sites/donasi-deepin-id/deploys)
-
-> Repository **PUBLIC** — email disensor via HMAC-SHA512, donor_id ireversibel.
-
 Situs halaman donasi komunitas deepin Indonesia: **[donasi.deepin.id](https://donasi.deepin.id)**
 
 ---
