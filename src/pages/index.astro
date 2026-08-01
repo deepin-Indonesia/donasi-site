@@ -1,57 +1,59 @@
 ---
 import Layout from '@/components/Layout.astro';
 import { SITE } from '@/data/site';
+import { donors, formatRupiah, lastUpdated, type Donor } from '@/data/donors';
 
-const tipsText = `Jangan ragu untuk bertanya atau berdiskusi di grup Telegram kami. Komunitas deepin Indonesia selalu siap membantu!
+const data = donors;
 
-📢 **Cara bergabung:**
-1. Klik tautan: https://t.me/Linux_deepin_ID
-2. Perkenalkan diri kamu
-3. Mulai berdiskusi dan berbagi pengalaman`;
+const allTotal = data.reduce((sum, d) => sum + d.amount, 0);
+const allCount = data.length;
+
+const anonDonors = data.filter(d => !d.name);
+const anonTotal = anonDonors.reduce((sum, d) => sum + d.amount, 0);
+const anonCount = anonDonors.length;
+
+const publicDonors = data.filter(d => d.name && d.donor_id);
+const grouped = new Map<string, { name: string; email: string; total: number; count: number }>();
+for (const d of publicDonors) {
+  const existing = grouped.get(d.donor_id);
+  if (existing) { existing.total += d.amount; existing.count += 1; }
+  else { grouped.set(d.donor_id, { name: d.name, email: d.email, total: d.amount, count: 1 }); }
+}
+const top3 = [...grouped.values()].sort((a, b) => b.total - a.total).slice(0, 3);
+
+const latest = [...data].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
+
+function getDonorCount(donor: Donor) {
+  if (!donor.name || !donor.donor_id) return 0;
+  return publicDonors.filter(d => d.donor_id === donor.donor_id).length;
+}
 ---
 
 <Layout title="Donasi" description="Dukung pengembangan komunitas deepin Indonesia.">
-  <!-- Hero -->
   <section class="relative overflow-hidden bg-gradient-to-br from-gray-900 via-slate-800 to-deepin-900 py-16 lg:py-20">
     <div class="container-main relative text-center">
       <img src="/images/deepin-id.png" alt="deepin" width="96" height="96" class="w-24 h-24 mx-auto mb-5 drop-shadow-xl" />
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-white">
-        Donasi <span class="text-deepin-400">deepin</span> Indonesia
-      </h1>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white">Donasi <span class="text-deepin-400">deepin</span> Indonesia</h1>
       <p class="mt-3 text-deepin-200 text-lg">Dukung kami untuk terus berkembang</p>
     </div>
   </section>
 
-  <!-- Payment Section -->
   <section class="py-12 bg-gray-50">
     <div class="container-main">
       <div class="grid lg:grid-cols-5 gap-8">
-        <!-- Info -->
         <div class="lg:col-span-3 space-y-5">
-          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-deepin-50 text-deepin-700 text-xs font-semibold">
-            <i class="fas fa-heart text-[10px]" /> DONASI
-          </span>
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-deepin-50 text-deepin-700 text-xs font-semibold"><i class="fas fa-heart text-[10px]" /> DONASI</span>
           <h2 class="text-3xl font-extrabold text-gray-900">Bantu Kami Berkembang</h2>
-          <p class="text-gray-500 leading-relaxed">
-            Komunitas deepin Indonesia dijalankan sepenuhnya oleh <strong class="text-gray-700">relawan</strong>.
-            Donasi Anda digunakan untuk operasional server, event komunitas, pembuatan konten edukasi,
-            dan pengembangan ekosistem deepin di Indonesia.
-          </p>
-
-          <!-- Notes -->
+          <p class="text-gray-500 leading-relaxed">Komunitas deepin Indonesia dijalankan sepenuhnya oleh <strong class="text-gray-700">relawan</strong>. Donasi Anda digunakan untuk operasional server, event komunitas, pembuatan konten edukasi, dan pengembangan ekosistem deepin di Indonesia.</p>
           <div class="bg-deepin-50 border border-deepin-200 rounded-xl p-4 text-sm text-deepin-800 space-y-2">
-            <p><i class="fas fa-info-circle mr-2" /><strong>Nama</strong> dan <strong>email</strong> bersifat opsional — jika diisi akan ditampilkan di halaman ini. Email otomatis disensor.</p>
-            <p><i class="fas fa-shield-alt mr-2" /><strong>Nomor HP</strong> tidak akan pernah ditampilkan secara publik.</p>
-            <p><i class="fas fa-user-secret mr-2" />Jika nama dikosongkan, donasi dicatat sebagai <strong>anonim</strong>.</p>
+            <p><i class="fas fa-info-circle mr-2" /><strong>Nama</strong> dan <strong>email</strong> opsional — email otomatis disensor.</p>
+            <p><i class="fas fa-shield-alt mr-2" /><strong>Nomor HP</strong> tidak akan pernah ditampilkan.</p>
+            <p><i class="fas fa-user-secret mr-2" />Kosongkan nama untuk donasi <strong>anonim</strong>.</p>
           </div>
-
-          <!-- Other donation -->
           <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-            <p><i class="fas fa-hand-holding-heart mr-2" /><strong>Bentuk Donasi Lainnya:</strong> selain donasi tunai, kami juga terbuka untuk <strong>server</strong>, <strong>merchandise</strong>, <strong>sponsorship event</strong>, <strong>domain</strong>, dan lainnya — hubungi <a href={`mailto:${SITE.email}`} class="text-amber-900 underline font-semibold">{SITE.email}</a></p>
+            <p><i class="fas fa-hand-holding-heart mr-2" /><strong>Bentuk Donasi Lainnya:</strong> server, merchandise, sponsorship event, domain, dll — hubungi <a href={`mailto:${SITE.email}`} class="text-amber-900 underline font-semibold">{SITE.email}</a></p>
           </div>
         </div>
-
-        <!-- Payment Card -->
         <div class="lg:col-span-2">
           <div class="card overflow-hidden sticky top-[90px]">
             <div class="bg-gradient-to-br from-deepin-600 to-deepin-800 p-6 text-center text-white">
@@ -59,16 +61,12 @@ const tipsText = `Jangan ragu untuk bertanya atau berdiskusi di grup Telegram ka
               <p class="text-sm opacity-80">Pilih nominal sesuka hati — tidak ada minimal</p>
             </div>
             <div class="p-6 text-center space-y-4">
-              <a href="https://app.midtrans.com/payment-links/Donasi-deepin-Indonesia-qSHW6Bup"
-                 target="_blank" rel="noopener"
-                 class="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold text-lg transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-red-500/25">
+              <a href="https://app.midtrans.com/payment-links/Donasi-deepin-Indonesia-qSHW6Bup" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold text-lg transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-red-500/25">
                 <i class="fas fa-heart" /> Donasi via Midtrans <i class="fas fa-external-link-alt text-sm ml-1" />
               </a>
               <p class="text-xs text-gray-400"><i class="fas fa-lock mr-1 text-green-500" /> Pembayaran aman & terenkripsi</p>
               <div class="pt-4 border-t border-gray-100 flex flex-wrap justify-center gap-2">
-                {['Bank Transfer', 'GoPay', 'Indomaret', 'QRIS'].map((m) => (
-                  <span class="px-3 py-1.5 rounded-lg bg-gray-50 text-xs text-gray-500 font-medium">{m}</span>
-                ))}
+                {['Bank Transfer', 'GoPay', 'Indomaret', 'QRIS'].map((m) => (<span class="px-3 py-1.5 rounded-lg bg-gray-50 text-xs text-gray-500 font-medium">{m}</span>))}
               </div>
             </div>
           </div>
@@ -77,11 +75,56 @@ const tipsText = `Jangan ragu untuk bertanya atau berdiskusi di grup Telegram ka
     </div>
   </section>
 
-  <!-- Donors placeholder -->
   <section class="py-16 bg-white">
-    <div class="container-main text-center">
-      <h2 class="text-2xl font-extrabold text-gray-900 mb-3">Apresiasi Donatur</h2>
-      <p class="text-gray-500">Data donatur akan ditampilkan di sini setelah ada donasi masuk.</p>
+    <div class="container-main">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-2"><i class="fas fa-trophy text-amber-500 mr-2" /> Apresiasi Donatur</h2>
+        <p class="text-gray-500">Total <strong>{allCount}</strong> donasi terkumpul senilai <strong>Rp {formatRupiah(allTotal)}</strong></p>
+        <p class="text-xs text-gray-400 mt-1.5 italic"><i class="fas fa-sync-alt mr-1" /> Data per {lastUpdated}</p>
+      </div>
+
+      {anonCount > 0 && (
+        <div class="max-w-md mx-auto mb-10 p-5 rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 text-center">
+          <i class="fas fa-user-secret text-3xl text-gray-300 mb-2" />
+          <h3 class="font-bold text-gray-700">Donatur Anonim</h3>
+          <p class="text-sm text-gray-500 mt-1">{anonCount} donasi &middot; total <strong>Rp {formatRupiah(anonTotal)}</strong></p>
+        </div>
+      )}
+
+      <div class="grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+        {top3.map((d, i) => (
+          <div class="card p-5 text-center relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
+            {i === 0 && <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">👑</div>}
+            {i === 1 && <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-xl">🥈</div>}
+            {i === 2 && <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-xl">🥉</div>}
+            <div class="w-14 h-14 rounded-full bg-deepin-50 flex items-center justify-center mx-auto mb-3 mt-2">
+              <span class="text-lg font-extrabold text-deepin-600">{d.name.charAt(0)}</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-sm">{d.name}</h3>
+            <p class="text-xs text-gray-400 font-mono mt-0.5">{d.email}</p>
+            <p class="text-lg font-extrabold text-deepin-600 mt-2">Rp {formatRupiah(d.total)}</p>
+            {d.count > 1 && <p class="text-xs text-gray-400 mt-0.5">{d.count}x donasi</p>}
+          </div>
+        ))}
+      </div>
+
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center"><i class="fas fa-clock text-deepin-600 mr-2" /> Donasi Terbaru</h3>
+      <div class="max-w-xl mx-auto divide-y divide-gray-100 border rounded-xl overflow-hidden">
+        {latest.map((d) => {
+          const count = getDonorCount(d);
+          return (
+            <div class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition-colors">
+              <div class="w-9 h-9 rounded-full bg-deepin-50 flex items-center justify-center shrink-0">
+                {d.name ? <span class="text-xs font-bold text-deepin-600">{d.name.charAt(0)}</span> : <i class="fas fa-user-secret text-xs text-gray-400" />}
+              </div>
+              <span class="flex-1 text-sm font-medium text-gray-800">{d.name || 'Anonim'}</span>
+              <span class="text-sm font-bold text-deepin-600">Rp {formatRupiah(d.amount)}</span>
+              <span class="text-xs text-gray-400 min-w-[85px] text-right">{new Date(d.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+              {count > 1 && d.name && <span class="text-[10px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">{count}&times;</span>}
+            </div>
+          );
+        })}
+      </div>
     </div>
   </section>
 </Layout>
