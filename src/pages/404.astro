@@ -1,0 +1,23 @@
+---
+import Layout from '@/components/Layout.astro';
+---
+
+<Layout title="Halaman Tidak Ditemukan">
+  <section class="min-h-[70vh] flex items-center justify-center py-20">
+    <div class="text-center container-main">
+      <div class="text-8xl font-extrabold text-gray-200 mb-4">404</div>
+      <h1 class="text-3xl font-extrabold text-gray-900 mb-3">Ups! Halaman Tidak Ditemukan</h1>
+      <p class="text-gray-500 max-w-md mx-auto mb-8">
+        Halaman yang kamu cari mungkin sudah dipindahkan, dihapus, atau tidak pernah ada.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="https://deepin.id" class="btn-primary w-full sm:w-auto justify-center">
+          <i class="fas fa-home mr-1.5" /> Kembali ke Home
+        </a>
+        <a href="https://t.me/Linux_deepin_ID" target="_blank" rel="noopener" class="btn-ghost w-full sm:w-auto justify-center border border-gray-200">
+          <i class="fab fa-telegram-plane mr-1.5" /> Tanya Komunitas
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
