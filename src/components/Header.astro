@@ -1,0 +1,137 @@
+---
+import { MAIN_NAV, ABOUT_NAV } from '@/data/site';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 glass border-b border-gray-100/50" id="header">
+  <nav class="container-main flex items-center justify-between h-[72px]" aria-label="Main">
+    <!-- Logo -->
+    <a href="https://deepin.id" class="flex items-center gap-2.5 shrink-0" aria-label="deepin Indonesia home">
+      <img src="/images/deepin-id.png" alt="deepin" width="36" height="36" class="w-9 h-9" />
+      <img
+        src="/images/deepin-id-text_nobg.png"
+        alt="deepin Indonesia"
+        width="160"
+        height="32"
+        class="h-7 w-auto hidden sm:block"
+      />
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden lg:flex items-center gap-1">
+      {MAIN_NAV.map((item) => (
+        item.children ? (
+          <div class="relative group">
+            <button class="btn-ghost text-sm font-medium py-2">
+              {item.title}
+              <i class="fas fa-chevron-down text-[10px] ml-1 opacity-50 group-hover:rotate-180 transition-transform" />
+            </button>
+            <div class="absolute top-full left-0 mt-1 bg-white rounded-xl border border-gray-100 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[200px] py-2">
+              {item.children.map((child) => (
+                <a href={child.url} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-deepin-600 transition-colors">
+                  {child.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={item.url} class="btn-ghost text-sm font-medium py-2">
+            {item.title}
+          </a>
+        )
+      ))}
+
+      <!-- Donasi CTA -->
+      <a href="https://donasi.deepin.id" class="btn-primary text-sm py-2 px-4 ml-3 !rounded-lg">
+        <i class="fas fa-heart text-xs" /> Donasi
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="lg:hidden flex flex-col gap-1.5 p-2 z-50"
+      id="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="block w-6 h-0.5 bg-gray-700 rounded transition-transform origin-center menu-bar" />
+      <span class="block w-6 h-0.5 bg-gray-700 rounded transition-opacity menu-bar" />
+      <span class="block w-6 h-0.5 bg-gray-700 rounded transition-transform origin-center menu-bar" />
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="hidden lg:hidden fixed inset-0 top-[72px] bg-white z-40 overflow-y-auto" id="mobile-menu">
+    <div class="container-main py-6 space-y-2">
+      {MAIN_NAV.map((item) => (
+        item.children ? (
+          <details class="group">
+            <summary class="flex items-center justify-between py-3 px-4 rounded-xl text-gray-800 font-medium cursor-pointer hover:bg-gray-50">
+              {item.title}
+              <i class="fas fa-chevron-down text-xs opacity-40 group-open:rotate-180 transition-transform" />
+            </summary>
+            <div class="ml-4 mt-1 space-y-1">
+              {item.children.map((child) => (
+                <a href={child.url} class="block py-2.5 px-4 rounded-lg text-sm text-gray-600 hover:bg-gray-50">
+                  {child.title}
+                </a>
+              ))}
+            </div>
+          </details>
+        ) : (
+          <a href={item.url} class="block py-3 px-4 rounded-xl text-gray-800 font-medium hover:bg-gray-50">
+            {item.title}
+          </a>
+        )
+      ))}
+      <a href="https://donasi.deepin.id" class="flex items-center justify-center gap-2 mt-4 py-3 px-4 rounded-xl bg-deepin-600 text-white font-semibold">
+        <i class="fas fa-heart text-sm" /> Donasi
+      </a>
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div class="hidden lg:hidden fixed inset-0 top-[72px] bg-black/30 z-30" id="menu-backdrop"></div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const backdrop = document.getElementById('menu-backdrop')!;
+  const bars = toggle.querySelectorAll('.menu-bar') as NodeListOf<HTMLElement>;
+
+  function closeMenu() {
+    menu.classList.add('hidden');
+    backdrop.classList.add('hidden');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    bars[0].style.transform = '';
+    bars[1].style.opacity = '1';
+    bars[2].style.transform = '';
+  }
+
+  function openMenu() {
+    menu.classList.remove('hidden');
+    backdrop.classList.remove('hidden');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    bars[1].style.opacity = '0';
+    bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+  }
+
+  toggle.addEventListener('click', () => {
+    menu.classList.contains('hidden') ? openMenu() : closeMenu();
+  });
+  backdrop.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.classList.contains('hidden')) closeMenu();
+  });
+
+  // Header shadow on scroll
+  const header = document.getElementById('header')!;
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-sm', window.scrollY > 10);
+  });
+</script>

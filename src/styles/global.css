@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deepin-50: #eff6ff;
+  --color-deepin-100: #dbeafe;
+  --color-deepin-200: #bfdbfe;
+  --color-deepin-300: #93c5fd;
+  --color-deepin-400: #60a5fa;
+  --color-deepin-500: #3b82f6;
+  --color-deepin-600: #1a6dd4;
+  --color-deepin-700: #1250a0;
+  --color-deepin-800: #0e3d7a;
+  --color-deepin-900: #0a2954;
+  --color-deepin-950: #061a38;
+
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-gray-800 antialiased font-sans;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  ::selection {
+    @apply bg-deepin-200 text-deepin-900;
+  }
+}
+
+@layer components {
+  .container-main {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold
+           transition-all duration-200 cursor-pointer select-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-deepin-600 text-white hover:bg-deepin-700
+           hover:-translate-y-0.5 hover:shadow-lg hover:shadow-deepin-600/25
+           active:translate-y-0;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-white/30 text-white
+           hover:bg-white/10 hover:border-white/50;
+  }
+
+  .btn-ghost {
+    @apply btn text-gray-600 hover:bg-gray-100 hover:text-gray-900;
+  }
+
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100
+           shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+}
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}

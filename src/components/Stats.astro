@@ -1,0 +1,36 @@
+---
+const stats = [
+  { value: '60+', label: 'Penghargaan Internasional', icon: 'fa-trophy' },
+  { value: '33.000+', label: 'Kontribusi Upstream', icon: 'fa-code-branch' },
+  { value: '3M+', label: 'Pengguna Global', icon: 'fa-globe' },
+  { value: '34', label: 'Bahasa Didukung', icon: 'fa-language' },
+  { value: '49', label: 'Special Interest Groups', icon: 'fa-people-group' },
+  { value: '100.000+', label: 'Aplikasi Tersedia', icon: 'fa-layer-group' },
+];
+---
+
+<section class="py-16 bg-deepin-600 relative overflow-hidden">
+  <!-- BG gradient orbs -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-deepin-500 rounded-full opacity-30 blur-3xl" />
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-deepin-800 rounded-full opacity-30 blur-3xl" />
+  </div>
+
+  <div class="container-main relative">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+        deepin dalam <span class="text-deepin-200">Angka</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      {stats.map((s) => (
+        <div class="bg-white/10 backdrop-blur rounded-2xl p-5 text-center hover:bg-white/15 transition-colors">
+          <i class={`fas ${s.icon} text-2xl text-deepin-200 mb-3`} />
+          <div class="text-2xl sm:text-3xl font-extrabold text-white mb-1">{s.value}</div>
+          <div class="text-xs text-deepin-200 leading-snug">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
