@@ -73,12 +73,12 @@ const pageTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} — ${SITE
     />
 
     <!-- Google Analytics -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4}`}></script>
-    <script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2J4TLB9W7H"></script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', '{SITE.ga4}');
+      gtag('config', 'G-2J4TLB9W7H');
     </script>
 
     <title>{pageTitle}</title>
