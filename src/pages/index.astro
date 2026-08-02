@@ -79,7 +79,7 @@ function getDonorCount(donor: Donor) {
           </div>
 
           <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-            <p><i class="fas fa-hand-holding-heart mr-2" /><strong>Bentuk Donasi Lainnya:</strong> server, merchandise, sponsorship event, domain — hubungi <a href={`mailto:${SITE.email}`} class="text-amber-900 underline font-semibold">{SITE.email}</a></p>
+            <p><i class="fas fa-hand-holding-heart mr-2" /><strong>Bentuk Donasi Lainnya:</strong> server, merchandise, sponsorship event, domain — hubungi <a href={`mailto:${SITE.email}`} class="text-amber-900 font-semibold hover:underline">{SITE.email}</a></p>
           </div>
         </div>
 
@@ -97,7 +97,7 @@ function getDonorCount(donor: Donor) {
               </a>
               <p class="text-xs text-gray-400"><i class="fas fa-lock mr-1 text-green-500" /> Pembayaran aman & terenkripsi</p>
               <div class="pt-4 border-t border-gray-100 grid grid-cols-2 gap-2">
-                {['Bank Transfer','GoPay','QRIS','Indomaret'].map((m) => (<span class="px-3 py-2 rounded-lg bg-gray-50 text-xs text-gray-500 font-medium text-center">{m}</span>))}
+                {['Bank Transfer','GoPay','QRIS','Virtual Account'].map((m) => (<span class="px-3 py-2 rounded-lg bg-gray-50 text-xs text-gray-500 font-medium text-center">{m}</span>))}
               </div>
             </div>
           </div>
