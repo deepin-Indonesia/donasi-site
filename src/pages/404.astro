@@ -20,9 +20,10 @@ import Layout from '@/components/Layout.astro';
       <p class="text-gray-500 leading-relaxed max-w-sm mx-auto mb-3 text-[15px]">
         Sepertinya halaman yang kamu tuju sudah dipindahkan ke alamat lain, sudah dihapus, salah ketik alamat, atau memang halaman tersebut tidak pernah ada sejak awal.
       </p>
-      <p class="text-xs text-gray-400 font-mono bg-gray-100 rounded-lg px-3 py-2 inline-block mb-8 break-all max-w-full">
-        {Astro.url.pathname}
+      <p class="text-xs text-gray-400 font-mono bg-gray-100 rounded-lg px-3 py-2 inline-block mb-8 break-all max-w-full" id="url-path">
+        ...
       </p>
+      <script>document.getElementById('url-path').textContent=window.location.pathname</script>
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
