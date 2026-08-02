@@ -34,9 +34,6 @@ function getDonorCount(donor: Donor) {
   <section class="relative overflow-hidden bg-gradient-to-br from-deepin-700 via-deepin-800 to-gray-900 py-16 lg:py-24">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(26,109,212,0.2)_0%,transparent_60%)]" />
     <div class="container-main relative text-center">
-      <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-deepin-200 text-xs font-semibold tracking-wide uppercase mb-6 backdrop-blur-sm">
-        <i class="fas fa-heart text-red-400" /> Didukung Komunitas
-      </span>
       <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4">
         Dukung <span class="text-deepin-400">deepin</span> Indonesia
       </h1>
@@ -79,7 +76,7 @@ function getDonorCount(donor: Donor) {
           </div>
 
           <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-            <p><i class="fas fa-hand-holding-heart mr-2" /><strong>Bentuk Donasi Lainnya:</strong> server, merchandise, sponsorship event, domain — hubungi <a href={`mailto:${SITE.email}`} class="text-amber-900 font-semibold hover:underline">{SITE.email}</a></p>
+            <p><i class="fas fa-hand-holding-heart mr-2" /><strong>Bentuk Donasi Lainnya:</strong> server, VPS, domain, merchandise, sponsorship event, dan lain-lain — hubungi <a href={`mailto:${SITE.email}`} class="text-amber-900 font-semibold hover:underline">{SITE.email}</a></p>
           </div>
         </div>
 
@@ -124,6 +121,7 @@ function getDonorCount(donor: Donor) {
       )}
 
       <!-- Top 3 -->
+      <p class="text-center text-xs text-gray-400 mb-4">Top donatur dihitung berdasarkan total donasi yang digabung dari email yang sama.</p>
       <div class="grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-14">
         {top3.map((d, i) => (
           <div class="card p-5 pt-8 text-center relative group hover:-translate-y-1 transition-all duration-300">
