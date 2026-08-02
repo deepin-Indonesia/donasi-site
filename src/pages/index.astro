@@ -61,13 +61,13 @@ function getDonorCount(donor: Donor) {
           <div>
             <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-deepin-50 text-deepin-700 text-xs font-semibold mb-4"><i class="fas fa-heart text-[10px]" /> DONASI</span>
             <h2 class="text-3xl font-extrabold text-gray-900 mb-3">Bantu Kami Berkembang</h2>
-            <p class="text-gray-500 leading-relaxed">Komunitas deepin Indonesia berkomitmen menghadirkan ekosistem open source terbaik. Donasi Anda 100% digunakan untuk operasional server, event komunitas, pembuatan konten edukasi, dan pengembangan ekosistem deepin di Indonesia.</p>
+            <p class="text-gray-500 leading-relaxed">Komunitas deepin Indonesia berkomitmen menghadirkan ekosistem open source terbaik. Donasi Anda digunakan untuk operasional server, event komunitas, pembuatan konten edukasi, pengembangan ekosistem deepin di Indonesia, dan berbagai kebutuhan operasional lainnya yang mendukung keberlangsungan komunitas.</p>
           </div>
           
           <div class="grid sm:grid-cols-2 gap-4">
             <div class="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-100">
               <i class="fas fa-check-circle text-green-500 mt-0.5" />
-              <div><strong class="text-sm text-gray-800">Nama & email opsional</strong><p class="text-xs text-gray-500 mt-0.5">Email otomatis disensor. Kosongkan untuk anonim.</p></div>
+              <div><strong class="text-sm text-gray-800">Nama & email opsional</strong><p class="text-xs text-gray-500 mt-0.5">Top donatur dihitung berdasarkan total donasi yang digabung dari email yang sama. Nama ditampilkan di halaman, email disensor. Jika email dikosongkan, donasi akan masuk ke saldo anonim.</p></div>
             </div>
             <div class="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-100">
               <i class="fas fa-shield-alt text-green-500 mt-0.5" />
@@ -121,7 +121,6 @@ function getDonorCount(donor: Donor) {
       )}
 
       <!-- Top 3 -->
-      <p class="text-center text-xs text-gray-400 mb-4">Top donatur dihitung berdasarkan total donasi yang digabung dari email yang sama.</p>
       <div class="grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-14">
         {top3.map((d, i) => (
           <div class="card p-5 pt-8 text-center relative group hover:-translate-y-1 transition-all duration-300">
