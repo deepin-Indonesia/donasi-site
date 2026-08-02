@@ -40,7 +40,7 @@ function getDonorCount(donor: Donor) {
       <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4">
         Dukung <span class="text-deepin-400">deepin</span> Indonesia
       </h1>
-      <p class="text-deepin-200 text-lg max-w-xl mx-auto">Setiap donasi membantu operasional server, event komunitas, dan konten edukasi — dikelola oleh relawan.</p>
+      <p class="text-deepin-200 text-lg max-w-xl mx-auto">Setiap donasi membantu operasional server, event komunitas, dan konten edukasi deepin di Indonesia.</p>
       <!-- Quick Stats -->
       <div class="flex flex-wrap justify-center gap-6 mt-8">
         <div class="text-center">
@@ -64,7 +64,7 @@ function getDonorCount(donor: Donor) {
           <div>
             <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-deepin-50 text-deepin-700 text-xs font-semibold mb-4"><i class="fas fa-heart text-[10px]" /> DONASI</span>
             <h2 class="text-3xl font-extrabold text-gray-900 mb-3">Bantu Kami Berkembang</h2>
-            <p class="text-gray-500 leading-relaxed">Komunitas deepin Indonesia dijalankan sepenuhnya oleh <strong class="text-gray-700">relawan</strong>. Donasi Anda 100% digunakan untuk operasional server, event komunitas, pembuatan konten edukasi, dan pengembangan ekosistem deepin di Indonesia.</p>
+            <p class="text-gray-500 leading-relaxed">Komunitas deepin Indonesia berkomitmen menghadirkan ekosistem open source terbaik. Donasi Anda 100% digunakan untuk operasional server, event komunitas, pembuatan konten edukasi, dan pengembangan ekosistem deepin di Indonesia.</p>
           </div>
           
           <div class="grid sm:grid-cols-2 gap-4">
@@ -126,10 +126,10 @@ function getDonorCount(donor: Donor) {
       <!-- Top 3 -->
       <div class="grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-14">
         {top3.map((d, i) => (
-          <div class="card p-5 text-center relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
-            {i === 0 && <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">👑</div>}
-            {i === 1 && <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-xl">🥈</div>}
-            {i === 2 && <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-xl">🥉</div>}
+          <div class="card p-5 pt-8 text-center relative group hover:-translate-y-1 transition-all duration-300">
+            {i === 0 && <div class="text-2xl mb-1">👑</div>}
+            {i === 1 && <div class="text-xl mb-1">🥈</div>}
+            {i === 2 && <div class="text-xl mb-1">🥉</div>}
             <div class="w-14 h-14 rounded-full bg-deepin-50 flex items-center justify-center mx-auto mb-3 mt-2">
               <span class="text-lg font-extrabold text-deepin-600">{d.name.charAt(0)}</span>
             </div>
@@ -154,7 +154,7 @@ function getDonorCount(donor: Donor) {
               <span class="flex-1 text-sm font-medium text-gray-800">{d.name || 'Anonim'}</span>
               <span class="text-sm font-bold text-deepin-600">Rp {formatRupiah(d.amount)}</span>
               <span class="text-xs text-gray-400 min-w-[85px] text-right">{new Date(d.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
-              {count > 1 && d.name && <span class="text-[10px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">{count}&times;</span>}
+              {d.name ? <span class="text-[10px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">{count}&times;</span> : <span class="text-[10px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">-</span>}
             </div>
           );
         })}

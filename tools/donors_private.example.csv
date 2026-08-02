@@ -1,38 +1,38 @@
 name,email,phone,amount,date
-[DUMMY] Budi Santoso,budi.santoso@email.com,081234567890,100000,2026-07-01
-[DUMMY] Siti Rahayu,siti.rahayu@email.com,081234567891,150000,2026-07-01
+[DUMMY] Budi Santoso,dummy1@example.com,08xxxxxxxxxxxx,100000,2026-07-01
+[DUMMY] Siti Rahayu,dummy2@example.com,08xxxxxxxxxxxx,150000,2026-07-01
 ,,,50000,2026-07-02
-[DUMMY] Andi Pratama,andi.pratama@email.com,081234567892,250000,2026-07-03
-[DUMMY] Maya Indah,maya.indah@email.com,081234567893,75000,2026-07-03
-[DUMMY] Rizky Fauzi,rizky.fauzi@email.com,081234567894,100000,2026-07-03
+[DUMMY] Andi Pratama,dummy3@example.com,08xxxxxxxxxxxx,250000,2026-07-03
+[DUMMY] Maya Indah,dummy4@example.com,08xxxxxxxxxxxx,75000,2026-07-03
+[DUMMY] Rizky Fauzi,dummy5@example.com,08xxxxxxxxxxxx,100000,2026-07-03
 ,,,200000,2026-07-04
-[DUMMY] Dian Permata,dian.permata@email.com,081234567895,150000,2026-07-05
-[DUMMY] Hendra Gunawan,hendra.gunawan@email.com,081234567896,50000,2026-07-05
-[DUMMY] Budi Santoso,budi.santoso@email.com,081234567890,500000,2026-07-06
-[DUMMY] Putri Amelia,putri.amelia@email.com,081234567897,175000,2026-07-07
+[DUMMY] Dian Permata,dummy6@example.com,08xxxxxxxxxxxx,150000,2026-07-05
+[DUMMY] Hendra Gunawan,dummy7@example.com,08xxxxxxxxxxxx,50000,2026-07-05
+[DUMMY] Budi Santoso,dummy1@example.com,08xxxxxxxxxxxx,500000,2026-07-06
+[DUMMY] Putri Amelia,dummy8@example.com,08xxxxxxxxxxxx,175000,2026-07-07
 ,,,100000,2026-07-07
-[DUMMY] Siti Rahayu,siti.rahayu@email.com,081234567891,350000,2026-07-08
-[DUMMY] Ahmad Fauzan,ahmad.fauzan@email.com,081234567898,200000,2026-07-09
-[DUMMY] Rina Marlina,rina.marlina@email.com,081234567899,125000,2026-07-10
+[DUMMY] Siti Rahayu,dummy2@example.com,08xxxxxxxxxxxx,350000,2026-07-08
+[DUMMY] Ahmad Fauzan,dummy9@example.com,08xxxxxxxxxxxx,200000,2026-07-09
+[DUMMY] Rina Marlina,dummy10@example.com,08xxxxxxxxxxxx,125000,2026-07-10
 ,,,150000,2026-07-10
-[DUMMY] Dian Permata,dian.permata@email.com,081234567895,300000,2026-07-12
-[DUMMY] Yoga Prasetya,yoga.prasetya@email.com,081234567800,180000,2026-07-13
-[DUMMY] Budi Santoso,budi.santoso@email.com,081234567890,75000,2026-07-14
-[DUMMY] Nurul Hidayah,nurul.hidayah@email.com,081234567801,225000,2026-07-15
+[DUMMY] Dian Permata,dummy6@example.com,08xxxxxxxxxxxx,300000,2026-07-12
+[DUMMY] Yoga Prasetya,dummy11@example.com,08xxxxxxxxxxxx,180000,2026-07-13
+[DUMMY] Budi Santoso,dummy1@example.com,08xxxxxxxxxxxx,75000,2026-07-14
+[DUMMY] Nurul Hidayah,dummy12@example.com,08xxxxxxxxxxxx,225000,2026-07-15
 ,,,75000,2026-07-15
-[DUMMY] Andi Pratama,andi.pratama@email.com,081234567892,400000,2026-07-16
-[DUMMY] Siska Wulandari,siska.wulandari@email.com,081234567802,95000,2026-07-17
-[DUMMY] Maya Indah,maya.indah@email.com,081234567893,150000,2026-07-18
+[DUMMY] Andi Pratama,dummy3@example.com,08xxxxxxxxxxxx,400000,2026-07-16
+[DUMMY] Siska Wulandari,dummy13@example.com,08xxxxxxxxxxxx,95000,2026-07-17
+[DUMMY] Maya Indah,dummy4@example.com,08xxxxxxxxxxxx,150000,2026-07-18
 ,,,300000,2026-07-19
-[DUMMY] Rizky Fauzi,rizky.fauzi@email.com,081234567894,250000,2026-07-20
-[DUMMY] Kartika Dewi,kartika.dewi@email.com,081234567803,135000,2026-07-20
-[DUMMY] Hendra Gunawan,hendra.gunawan@email.com,081234567896,200000,2026-07-22
-[DUMMY] Putri Amelia,putri.amelia@email.com,081234567897,325000,2026-07-23
+[DUMMY] Rizky Fauzi,dummy5@example.com,08xxxxxxxxxxxx,250000,2026-07-20
+[DUMMY] Kartika Dewi,dummy14@example.com,08xxxxxxxxxxxx,135000,2026-07-20
+[DUMMY] Hendra Gunawan,dummy7@example.com,08xxxxxxxxxxxx,200000,2026-07-22
+[DUMMY] Putri Amelia,dummy8@example.com,08xxxxxxxxxxxx,325000,2026-07-23
 ,,,50000,2026-07-23
-[DUMMY] Dimas Ardiansyah,dimas.ardiansyah@email.com,081234567804,160000,2026-07-24
-[DUMMY] Siti Rahayu,siti.rahayu@email.com,081234567891,275000,2026-07-25
-[DUMMY] Ahmad Fauzan,ahmad.fauzan@email.com,081234567898,100000,2026-07-26
+[DUMMY] Dimas Ardiansyah,dummy15@example.com,08xxxxxxxxxxxx,160000,2026-07-24
+[DUMMY] Siti Rahayu,dummy2@example.com,08xxxxxxxxxxxx,275000,2026-07-25
+[DUMMY] Ahmad Fauzan,dummy9@example.com,08xxxxxxxxxxxx,100000,2026-07-26
 ,,,175000,2026-07-27
-[DUMMY] Budi Santoso,budi.santoso@email.com,081234567890,200000,2026-07-28
-[DUMMY] Rina Marlina,rina.marlina@email.com,081234567899,310000,2026-07-29
-[DUMMY] Yoga Prasetya,yoga.prasetya@email.com,081234567800,50000,2026-07-30
+[DUMMY] Budi Santoso,dummy1@example.com,08xxxxxxxxxxxx,200000,2026-07-28
+[DUMMY] Rina Marlina,dummy10@example.com,08xxxxxxxxxxxx,310000,2026-07-29
+[DUMMY] Yoga Prasetya,dummy11@example.com,08xxxxxxxxxxxx,50000,2026-07-30

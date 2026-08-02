@@ -1,39 +1,39 @@
 name,email,donor_id,amount,date
-[DUMMY] Budi Santoso,budi********,5bee0bb99943,100000,2026-07-01
-[DUMMY] Siti Rahayu,siti********,267a12e43722,150000,2026-07-01
+[DUMMY] Budi Santoso,dumm********,276bf8109181,100000,2026-07-01
+[DUMMY] Siti Rahayu,dumm********,0329b56508c3,150000,2026-07-01
 ,,,50000,2026-07-02
-[DUMMY] Andi Pratama,andi********,fa49b7a36e6f,250000,2026-07-03
-[DUMMY] Maya Indah,maya********,785e3161d0f6,75000,2026-07-03
-[DUMMY] Rizky Fauzi,rizk********,c7470c345778,100000,2026-07-03
+[DUMMY] Andi Pratama,dumm********,3a585de8cae0,250000,2026-07-03
+[DUMMY] Maya Indah,dumm********,08034d1e058c,75000,2026-07-03
+[DUMMY] Rizky Fauzi,dumm********,a968114fa811,100000,2026-07-03
 ,,,200000,2026-07-04
-[DUMMY] Dian Permata,dian********,692ed6572a8d,150000,2026-07-05
-[DUMMY] Hendra Gunawan,hend********,7573516d4674,50000,2026-07-05
-[DUMMY] Budi Santoso,budi********,5bee0bb99943,500000,2026-07-06
-[DUMMY] Putri Amelia,putr********,c20e2d47a1d8,175000,2026-07-07
+[DUMMY] Dian Permata,dumm********,9707a9b712c0,150000,2026-07-05
+[DUMMY] Hendra Gunawan,dumm********,f87acdad103a,50000,2026-07-05
+[DUMMY] Budi Santoso,dumm********,276bf8109181,500000,2026-07-06
+[DUMMY] Putri Amelia,dumm********,2b8072bff10e,175000,2026-07-07
 ,,,100000,2026-07-07
-[DUMMY] Siti Rahayu,siti********,267a12e43722,350000,2026-07-08
-[DUMMY] Ahmad Fauzan,ahma********,5c869db8e72b,200000,2026-07-09
-[DUMMY] Rina Marlina,rina********,947e50ee6a73,125000,2026-07-10
+[DUMMY] Siti Rahayu,dumm********,0329b56508c3,350000,2026-07-08
+[DUMMY] Ahmad Fauzan,dumm********,6a4e0921e46b,200000,2026-07-09
+[DUMMY] Rina Marlina,dumm********,b2b5b788c7ad,125000,2026-07-10
 ,,,150000,2026-07-10
-[DUMMY] Dian Permata,dian********,692ed6572a8d,300000,2026-07-12
-[DUMMY] Yoga Prasetya,yoga********,13fb8ee3d4b2,180000,2026-07-13
-[DUMMY] Budi Santoso,budi********,5bee0bb99943,75000,2026-07-14
-[DUMMY] Nurul Hidayah,nuru********,b7cc732a0a7d,225000,2026-07-15
+[DUMMY] Dian Permata,dumm********,9707a9b712c0,300000,2026-07-12
+[DUMMY] Yoga Prasetya,dumm********,71d6ea5b06e4,180000,2026-07-13
+[DUMMY] Budi Santoso,dumm********,276bf8109181,75000,2026-07-14
+[DUMMY] Nurul Hidayah,dumm********,903efd05c468,225000,2026-07-15
 ,,,75000,2026-07-15
-[DUMMY] Andi Pratama,andi********,fa49b7a36e6f,400000,2026-07-16
-[DUMMY] Siska Wulandari,sisk********,c6bcddf6265c,95000,2026-07-17
-[DUMMY] Maya Indah,maya********,785e3161d0f6,150000,2026-07-18
+[DUMMY] Andi Pratama,dumm********,3a585de8cae0,400000,2026-07-16
+[DUMMY] Siska Wulandari,dumm********,5e297979368b,95000,2026-07-17
+[DUMMY] Maya Indah,dumm********,08034d1e058c,150000,2026-07-18
 ,,,300000,2026-07-19
-[DUMMY] Rizky Fauzi,rizk********,c7470c345778,250000,2026-07-20
-[DUMMY] Kartika Dewi,kart********,20ea3e29dbc1,135000,2026-07-20
-[DUMMY] Hendra Gunawan,hend********,7573516d4674,200000,2026-07-22
-[DUMMY] Putri Amelia,putr********,c20e2d47a1d8,325000,2026-07-23
+[DUMMY] Rizky Fauzi,dumm********,a968114fa811,250000,2026-07-20
+[DUMMY] Kartika Dewi,dumm********,e5915e025ae9,135000,2026-07-20
+[DUMMY] Hendra Gunawan,dumm********,f87acdad103a,200000,2026-07-22
+[DUMMY] Putri Amelia,dumm********,2b8072bff10e,325000,2026-07-23
 ,,,50000,2026-07-23
-[DUMMY] Dimas Ardiansyah,dima********,0a240fa3760e,160000,2026-07-24
-[DUMMY] Siti Rahayu,siti********,267a12e43722,275000,2026-07-25
-[DUMMY] Ahmad Fauzan,ahma********,5c869db8e72b,100000,2026-07-26
+[DUMMY] Dimas Ardiansyah,dumm********,66ad0a4ebcb7,160000,2026-07-24
+[DUMMY] Siti Rahayu,dumm********,0329b56508c3,275000,2026-07-25
+[DUMMY] Ahmad Fauzan,dumm********,6a4e0921e46b,100000,2026-07-26
 ,,,175000,2026-07-27
-[DUMMY] Budi Santoso,budi********,5bee0bb99943,200000,2026-07-28
-[DUMMY] Rina Marlina,rina********,947e50ee6a73,310000,2026-07-29
-[DUMMY] Yoga Prasetya,yoga********,13fb8ee3d4b2,50000,2026-07-30
-__TS__,"30 July 2026, 12:13 WIB",,,
+[DUMMY] Budi Santoso,dumm********,276bf8109181,200000,2026-07-28
+[DUMMY] Rina Marlina,dumm********,b2b5b788c7ad,310000,2026-07-29
+[DUMMY] Yoga Prasetya,dumm********,71d6ea5b06e4,50000,2026-07-30
+__TS__,"02 August 2026, 20:57 WIB",,,
