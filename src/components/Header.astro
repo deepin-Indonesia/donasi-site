@@ -38,7 +38,7 @@ const currentPath = Astro.url.pathname;
             </div>
           </div>
         ) : (
-          <a href={item.url} class="btn-ghost text-sm font-medium py-2" target="_blank" rel="noopener">
+          <a href={item.url} class="btn-ghost text-sm font-medium py-2">
             {item.title}
           </a>
         )
@@ -97,7 +97,7 @@ const currentPath = Astro.url.pathname;
             </div>
           </details>
         ) : (
-          <a href={item.url} class="block py-3 px-4 rounded-xl text-gray-800 font-medium hover:bg-gray-50" target="_blank" rel="noopener">
+          <a href={item.url} class="block py-3 px-4 rounded-xl text-gray-800 font-medium hover:bg-gray-50">
             {item.title}
           </a>
         )
