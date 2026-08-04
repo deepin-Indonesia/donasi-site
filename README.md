@@ -8,7 +8,7 @@ Menampilkan total donasi, top 3 donatur, 10 donasi terbaru, dan tombol donasi vi
 
 ## Tech Stack
 
-| | |
+| Technology | Detail |
 |---|---|
 | **Framework** | [Astro 7](https://astro.build) |
 | **Styling** | [Tailwind CSS v4](https://tailwindcss.com) |
