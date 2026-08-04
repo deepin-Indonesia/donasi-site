@@ -21,6 +21,7 @@ interface NavItem {
   url?: string;
   children?: NavItem[];
   highlight?: boolean;
+  external?: boolean;
 }
 
 export const MAIN_NAV: NavItem[] = [
@@ -36,7 +37,7 @@ export const MAIN_NAV: NavItem[] = [
       { title: 'Event', url: 'https://news.deepin.id/?tag=event' },
     ],
   },
-  { title: 'Gabung Komunitas', url: 'https://t.me/Linux_deepin_ID' },
+  { title: 'Gabung Komunitas', url: 'https://t.me/Linux_deepin_ID', external: true },
 ];
 
 export const ABOUT_NAV: NavItem[] = [

@@ -37,6 +37,10 @@ const currentPath = Astro.url.pathname;
               ))}
             </div>
           </div>
+        ) : item.external ? (
+          <a href={item.url} class="btn-ghost text-sm font-medium py-2" target="_blank" rel="noopener">
+            {item.title}
+          </a>
         ) : (
           <a href={item.url} class="btn-ghost text-sm font-medium py-2">
             {item.title}
@@ -96,6 +100,10 @@ const currentPath = Astro.url.pathname;
               ))}
             </div>
           </details>
+        ) : item.external ? (
+          <a href={item.url} class="block py-3 px-4 rounded-xl text-gray-800 font-medium hover:bg-gray-50" target="_blank" rel="noopener">
+            {item.title}
+          </a>
         ) : (
           <a href={item.url} class="block py-3 px-4 rounded-xl text-gray-800 font-medium hover:bg-gray-50">
             {item.title}
