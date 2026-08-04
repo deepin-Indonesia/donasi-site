@@ -12,3 +12,16 @@
 {"message":"[200] / 59ms","label":null,"level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"An error happened during full reload\nFailed to load url astro:server-app.js (resolved id: astro:server-app.js). Does the file exist?\nError: Failed to load url astro:server-app.js (resolved id: astro:server-app.js). Does the file exist?\n    at loadAndTransform (file:///D:/GitHub/deepin-Indonesia/donasi-site/node_modules/vite/dist/node/chunks/node.js:20583:31)","label":"vite","level":"error"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"program reload","label":"vite","level":"info"}

@@ -127,35 +127,3 @@ git push origin preview
 | 2 | `generate_donors.py` — sensor email (4 karakter + `********`), hapus No HP |
 | 3 | `HMAC-SHA512` — donor_id dari email + secret key, impossible to reverse |
 | 4 | `.secret_key` — gitignored, tanpa key tidak bisa verifikasi apapun |
-| **Production** | `main` | GitHub Pages (`donasi.deepin.id`) |
-| **Preview** | `preview` | Netlify (deploy preview) |
-
----
-
-## Setup Lokal
-
-```bash
-git clone --recurse-submodules https://github.com/deepin-Indonesia/donasi-site.git
-cd donasi-site
-bundle install
-bundle exec jekyll serve
-```
-
-Buka `http://localhost:4000`.
-
----
-
-## Subdomain
-
-| Situs | Domain |
-|---|---|
-| Home | [deepin.id](https://deepin.id) |
-| Download | [os.deepin.id](https://os.deepin.id) |
-| News | [news.deepin.id](https://news.deepin.id) |
-| **Donasi** | **[donasi.deepin.id](https://donasi.deepin.id)** |
-
----
-
-## Lisensi
-
-Proyek komunitas deepin Indonesia.
