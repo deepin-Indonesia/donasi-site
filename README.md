@@ -79,7 +79,7 @@ Semua orang bisa berkontribusi — tidak perlu jadi anggota organisasi.
 2. Clone fork kamu: `git clone https://github.com/USERNAME/donasi-site.git`
 3. `git checkout preview && git checkout -b feat/deskripsi`
 4. Edit, commit, push ke fork kamu
-5. Buka **Pull Request** ke `deepin-Indonesia/donasi-site` → target: `preview`
+5. Buka **Pull Request (PR)** ke `deepin-Indonesia/donasi-site` → target: `preview`
 
 ### Untuk anggota organisasi (push langsung)
 
@@ -88,7 +88,7 @@ Semua orang bisa berkontribusi — tidak perlu jadi anggota organisasi.
 3. Buat PR ke `preview`
 4. Setelah review, merge `preview` → `main`
 
-> ⚠️ Jangan push langsung ke `main` — harus lewat PR.
+> ⚠️ Jangan push langsung ke `main` — harus lewat PR (Pull Request).
 
 ## Cara Update Data Donatur
 
