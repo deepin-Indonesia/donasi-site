@@ -117,9 +117,6 @@ const currentPath = Astro.url.pathname;
           </a>
         )
       ))}
-      <a href="https://donasi.deepin.id" class="flex items-center justify-center gap-2 mt-4 py-3 px-4 rounded-xl bg-deepin-600 text-white font-semibold">
-        <i class="fas fa-heart text-sm" /> Donasi
-      </a>
       <!-- Tentang deepin -->
       <details class="group">
         <summary class="flex items-center justify-between py-3 px-4 rounded-xl text-gray-800 font-medium cursor-pointer hover:bg-gray-50">
@@ -134,6 +131,10 @@ const currentPath = Astro.url.pathname;
           ))}
         </div>
       </details>
+      <!-- Donasi CTA (paling akhir, sama seperti posisi paling kanan di desktop) -->
+      <a href="https://donasi.deepin.id" class="flex items-center justify-center gap-2 mt-4 py-3 px-4 rounded-xl bg-deepin-600 text-white font-semibold">
+        <i class="fas fa-heart text-sm" /> Donasi
+      </a>
     </div>
   </div>
 
