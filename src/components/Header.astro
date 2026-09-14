@@ -81,9 +81,16 @@ const currentPath = Astro.url.pathname;
       <span class="block w-6 h-0.5 bg-gray-700 rounded transition-transform origin-center menu-bar" />
     </button>
   </nav>
+</header>
 
-  <!-- Mobile Menu -->
-  <div class="hidden lg:hidden fixed inset-0 top-[72px] bg-white z-40 overflow-y-auto" id="mobile-menu">
+<!--
+  Menu mobile & backdrop sengaja diletakkan DI LUAR <header>.
+  <header> memakai `backdrop-blur-xl` (backdrop-filter), dan properti tersebut
+  membuat elemen menjadi containing block bagi semua `position: fixed` di
+  dalamnya. Jika diletakkan di dalam, `top-[72px]` mengacu ke tinggi header
+  (~74px) sehingga panel menu kolaps jadi ~0px dan tidak terlihat saat diklik.
+-->
+<div class="hidden lg:hidden fixed inset-x-0 top-[72px] bottom-0 bg-white z-40 overflow-y-auto" id="mobile-menu">
     <div class="container-main py-6 space-y-2">
       {MAIN_NAV.map((item) => (
         item.children ? (
@@ -130,9 +137,8 @@ const currentPath = Astro.url.pathname;
     </div>
   </div>
 
-  <!-- Backdrop -->
-  <div class="hidden lg:hidden fixed inset-0 top-[72px] bg-black/30 z-30" id="menu-backdrop"></div>
-</header>
+<!-- Backdrop -->
+<div class="hidden lg:hidden fixed inset-0 bg-black/30 z-30" id="menu-backdrop"></div>
 
 <script>
   const toggle = document.getElementById('menu-toggle')!;
