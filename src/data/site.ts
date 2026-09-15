@@ -44,10 +44,10 @@ export const ABOUT_NAV: NavItem[] = [
   {
     title: 'Tentang deepin',
     children: [
-      { title: 'Product Planning', url: '/tentang-deepin/product-planning/' },
-      { title: 'Original Apps', url: '/tentang-deepin/original-apps/' },
-      { title: 'Desktop Environment', url: '/tentang-deepin/desktop-environment/' },
-      { title: 'deepin Indonesia', url: '/tentang-deepin-id/', highlight: true },
+      { title: 'Product Planning', url: 'https://about.deepin.id/product-planning/' },
+      { title: 'Original Apps', url: 'https://about.deepin.id/original-apps/' },
+      { title: 'Desktop Environment', url: 'https://about.deepin.id/desktop-environment/' },
+      { title: 'deepin Indonesia', url: 'https://deepin.id', highlight: true },
     ],
   },
 ];
