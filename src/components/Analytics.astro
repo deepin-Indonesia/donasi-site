@@ -1,0 +1,385 @@
+---
+/**
+ * Google Analytics 4 + pelacakan perilaku pengguna.
+ *
+ * Komponen ini sengaja dibuat IDENTIK di semua subdomain (home, download, news,
+ * donasi, about) supaya data antar-situs bisa dibandingkan. Karena kelima situs
+ * memakai satu Measurement ID, setiap event menyertakan parameter `site`
+ * (diambil dari `location.host`) agar bisa dipisah per subdomain di GA4.
+ *
+ * Yang dilacak:
+ *  - page_context (referrer, viewport, bahasa, utm_source/medium/campaign)
+ *  - page_view (otomatis) + visibility_change
+ *  - scroll_depth (25/50/75/90/100%)
+ *  - engaged_reader (30/60/180/600 detik benar-benar aktif)
+ *  - outbound_click (keluar situs, mis. Telegram/YouTube/GitHub)
+ *  - download_click (ISO, .torrent, .deb, .rpm, .AppImage, .zip)
+ *  - nav_click (klik menu, header maupun drawer mobile)
+ *  - dropdown_toggle (buka/tutup menu dropdown di header)
+ *  - menu_section_toggle (buka/tutup seksi di drawer mobile)
+ *  - menu_toggle (buka/tutup menu hamburger)
+ *  - cta_click (tombol utama/outline)
+ *  - footer_click (klik tautan di footer)
+ *  - internal_site_click (pindah ke subdomain deepin.id lain)
+ *  - anchor_click (lompat ke section: daftar isi, "selengkapnya")
+ *  - filter_click (filter tag/kategori, mis. di halaman News)
+ *  - contact_click (link mailto:/tel:)
+ *  - data_track (nama event bebas dari atribut `data-track` di HTML)
+ *  - media_interaction (pemutar video/embed mulai diinteraksi)
+ *  - form_submit (form apa pun yang dikirim)
+ *  - share_click (bagikan artikel, per jaringan sosial)
+ *  - faq_toggle (buka/tutup accordion FAQ)
+ *  - tab_select (ganti tab, mis. arsitektur di halaman download)
+ *  - copy_text (pengguna menyalin teks, mis. hash checksum atau perintah)
+ *  - scroll_top (tombol kembali ke atas)
+ *  - page_404 (halaman tidak ditemukan beserta path-nya)
+ */
+import { SITE } from '@/data/site';
+
+const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
+---
+
+<!-- Google Analytics 4 -->
+<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+<script is:inline define:vars={{ GA4_ID }}>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA4_ID, {
+      send_page_view: true,
+      anonymize_ip: true,
+      transport_type: 'beacon',
+    });
+
+    var SITE_HOST = window.location.host;
+    /* Semua event (termasuk page_view otomatis) ikut membawa dimensi `site`,
+       supaya kelima subdomain bisa dibandingkan dalam satu property GA4. */
+     gtag('set', 'user_properties', { site: SITE_HOST });
+    var DOWNLOAD_RE = /\.(iso|torrent|deb|rpm|appimage|zip|img|sha256|sha512|sig|txt)(\?|#|$)/i;
+    var SHARE_HOSTS = ['t.me', 'telegram.me', 'wa.me', 'whatsapp.com', 'x.com', 'twitter.com', 'facebook.com', 'linkedin.com', 'reddit.com'];
+     /* Subdomain deepin.id lain (deepin.id, os., news., donasi., about.) dihitung
+       sebagai "pindah situs internal", bukan keluar dari ekosistem. */
+     var SIBLING_RE = /(^|\.)deepin\.id$/i;
+
+    /** Kirim event dengan konteks halaman + subdomain. */
+    function track(name, params) {
+      var payload = {
+        site: SITE_HOST,
+        page_path: window.location.pathname,
+        page_title: document.title,
+      };
+      if (params) {
+        for (var key in params) {
+          if (Object.prototype.hasOwnProperty.call(params, key)) payload[key] = params[key];
+        }
+      }
+      try {
+        gtag('event', name, payload);
+      } catch (e) {
+        /* jangan pernah mengganggu halaman */
+      }
+    }
+
+    /** Ambil teks singkat sebuah elemen untuk label event. */
+    function labelOf(el) {
+      if (!el) return '';
+      var text = (el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ');
+      return text.length > 80 ? text.slice(0, 80) + '…' : text;
+    }
+
+    /** Tentukan jenis link: share / download / outbound / internal. */
+    function classify(anchor) {
+      var href = anchor.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#') return null;
+      var url;
+      try {
+        url = new URL(anchor.href, window.location.href);
+      } catch (e) {
+        return null;
+      }
+      var sameSite = url.hostname === window.location.hostname;
+      return {
+        url: url.href,
+        host: url.hostname,
+        path: url.pathname,
+        sameSite: sameSite,
+        sibling: !sameSite && SIBLING_RE.test(url.hostname),
+        download: DOWNLOAD_RE.test(url.pathname),
+        share: SHARE_HOSTS.some(function (h) {
+          return url.hostname === h || url.hostname.endsWith('.' + h);
+        }),
+      };
+    }
+
+    function ready(fn) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn, { once: true });
+      } else {
+        fn();
+      }
+    }
+
+    ready(function () {
+      /* ---------- 0. Konteks kunjungan ---------- */
+      var referrerHost = 'direct';
+      try {
+        if (document.referrer) referrerHost = new URL(document.referrer).hostname || 'direct';
+      } catch (e) {
+        /* noop */
+      }
+      var qs = new URLSearchParams(window.location.search);
+      function query(name) {
+        var value = qs.get(name);
+        return value === null ? undefined : value;
+      }
+      track('page_context', {
+        referrer_host: referrerHost,
+        viewport: window.innerWidth + 'x' + window.innerHeight,
+        screen: window.screen ? window.screen.width + 'x' + window.screen.height : '',
+        language: navigator.language,
+        utm_source: query('utm_source'),
+        utm_medium: query('utm_medium'),
+        utm_campaign: query('utm_campaign'),
+      });
+
+      /* ---------- 1. Halaman 404 ---------- */
+      if (document.getElementById('url-path')) {
+        track('page_404', { not_found_path: window.location.pathname });
+      }
+
+      /* ---------- 2. Kedalaman scroll ---------- */
+      var marks = [25, 50, 75, 90, 100];
+      var markHit = {};
+      function onScroll() {
+        var doc = document.documentElement;
+        var scrollable = doc.scrollHeight - window.innerHeight;
+        var pct = scrollable > 0 ? Math.round((window.scrollY / scrollable) * 100) : 100;
+        for (var i = 0; i < marks.length; i++) {
+          if (pct >= marks[i] && !markHit[marks[i]]) {
+            markHit[marks[i]] = true;
+            track('scroll_depth', { percent_scrolled: marks[i] });
+          }
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      /* ---------- 3. Waktu engagement & visibilitas ---------- */
+      var engagedSeconds = 0;
+      var milestones = [30, 60, 180, 600];
+      var milestoneHit = {};
+      setInterval(function () {
+        if (document.visibilityState === 'visible') {
+          engagedSeconds += 5;
+          for (var i = 0; i < milestones.length; i++) {
+            if (engagedSeconds >= milestones[i] && !milestoneHit[milestones[i]]) {
+              milestoneHit[milestones[i]] = true;
+              track('engaged_reader', { seconds: milestones[i] });
+            }
+          }
+        }
+      }, 5000);
+
+      document.addEventListener('visibilitychange', function () {
+        track('visibility_change', { state: document.visibilityState });
+      });
+
+      /* ---------- 4. Klik (delegasi, fase capture) ---------- */
+      document.addEventListener(
+        'click',
+        function (ev) {
+          var target = ev.target;
+          if (!target || !target.closest) return;
+
+          /* 4a. Menu hamburger */
+          var toggle = target.closest('#menu-toggle');
+          if (toggle) {
+            var willOpen = toggle.getAttribute('aria-expanded') !== 'true';
+            track('menu_toggle', { state: willOpen ? 'open' : 'close' });
+            return;
+          }
+
+          /* 4b. Tombol kembali ke atas */
+          if (target.closest('#scroll-top')) {
+            track('scroll_top', { from_scroll_y: Math.round(window.scrollY) });
+            return;
+          }
+
+          /* 4b-2. Tombol dropdown di header (Tentang deepin, News, dll.) */
+          var dropdownBtn = target.closest('header button, header summary');
+          if (dropdownBtn) {
+            track('dropdown_toggle', { menu: labelOf(dropdownBtn) });
+            return;
+          }
+
+          /* 4b-3. Seksi yang dibuka/ditutup di drawer mobile */
+          var sectionToggle = target.closest('#mobile-menu summary');
+          if (sectionToggle) {
+            track('menu_section_toggle', { section: labelOf(sectionToggle) });
+            return;
+          }
+
+          /* 4c. Tab (mis. arsitektur di halaman download) */
+          var tab = target.closest('.arch-tab, [data-tab], [role="tab"]');
+          if (tab && !target.closest('a[href]')) {
+            track('tab_select', {
+              tab_id: tab.dataset.arch || tab.dataset.tab || labelOf(tab),
+            });
+          }
+
+          /* 4d. Link */
+          var anchor = target.closest('a[href]');
+          if (!anchor) return;
+
+          var rawHref = anchor.getAttribute('href') || '';
+          var text = labelOf(anchor);
+
+          /* 4e. Lompat ke bagian dalam halaman (daftar isi, "selengkapnya") */
+          if (rawHref.charAt(0) === '#') {
+            track('anchor_click', { anchor: rawHref, link_text: text });
+            return;
+          }
+
+          /* 4f. Kontak langsung (email / telepon) */
+          if (rawHref.indexOf('mailto:') === 0 || rawHref.indexOf('tel:') === 0) {
+            track('contact_click', {
+              contact_type: rawHref.slice(0, rawHref.indexOf(':')),
+              contact_value: rawHref.slice(rawHref.indexOf(':') + 1).split('?')[0],
+            });
+            return;
+          }
+
+          var info = classify(anchor);
+          if (!info) return;
+
+          /* 4f-2. Event kustom dari HTML: <a data-track="nama_event"> */
+          var customEvent = anchor.getAttribute('data-track');
+          if (customEvent) {
+            track(customEvent, { link_text: text, destination: info.url });
+          }
+
+          /* 4g. Filter tag / kategori */
+          if (anchor.closest('.tag-filter') || anchor.hasAttribute('data-tag')) {
+            track('filter_click', {
+              filter_value: anchor.getAttribute('data-tag') || text,
+              destination: info.url,
+            });
+            return;
+          }
+
+          if (info.share) {
+            track('share_click', { network: info.host, link_text: text, link_url: info.url });
+            return;
+          }
+
+          if (info.download) {
+            track('download_click', { file_name: info.path.split('/').pop(), link_url: info.url });
+            return;
+          }
+
+          if (!info.sameSite && info.sibling) {
+            track('internal_site_click', {
+              destination_site: info.host,
+              link_url: info.url,
+              link_text: text,
+            });
+          } else if (!info.sameSite) {
+            track('outbound_click', { link_domain: info.host, link_url: info.url, link_text: text });
+          }
+
+          /* Klik menu (header / drawer mobile) */
+          if (anchor.closest('header') || anchor.closest('#mobile-menu')) {
+            track('nav_click', {
+              link_text: text,
+              destination: info.url,
+              outbound: !info.sameSite,
+            });
+          }
+
+          /* Klik tautan di footer */
+          if (anchor.closest('footer')) {
+            track('footer_click', {
+              link_text: text,
+              destination: info.url,
+              outbound: !info.sameSite,
+            });
+          }
+
+          /* Tombol ajakan bertindak */
+          if (
+            anchor.classList.contains('btn-primary') ||
+            anchor.classList.contains('btn-outline') ||
+            anchor.classList.contains('btn-ghost') ||
+            anchor.hasAttribute('data-cta')
+          ) {
+            track('cta_click', { link_text: text, destination: info.url });
+          }
+        },
+        true
+      );
+
+      /* ---------- 5. Interaksi media tertanam (YouTube, dsb.) ---------- */
+      /* Klik di dalam <iframe> tidak bisa ditangkap langsung, jadi kita pakai
+         perpindahan fokus: saat fokus pindah ke iframe, window menjadi blur. */
+      window.addEventListener('blur', function () {
+        var active = document.activeElement;
+        if (!active || active.tagName !== 'IFRAME') return;
+        var src = active.getAttribute('src') || '';
+        track('media_interaction', {
+          media_src: src.split('?')[0],
+          media_title: active.getAttribute('title') || '',
+        });
+      });
+
+      /* ---------- 6. Form apa pun yang dikirim ---------- */
+      document.addEventListener(
+        'submit',
+        function (ev) {
+          var form = ev.target;
+          if (!form || form.tagName !== 'FORM') return;
+          track('form_submit', {
+            form_id: form.getAttribute('id') || form.getAttribute('name') || 'form',
+            form_action: form.getAttribute('action') || window.location.pathname,
+          });
+        },
+        true
+      );
+
+      /* ---------- 7. Accordion / FAQ ---------- */
+      document.addEventListener(
+        'toggle',
+        function (ev) {
+          var el = ev.target;
+          if (!el || el.tagName !== 'DETAILS' || !el.open) return;
+          var summary = el.querySelector('summary');
+          track('faq_toggle', { question: labelOf(summary) });
+        },
+        true
+      );
+
+      /* ---------- 8. Menyalin teks (checksum, perintah terminal) ---------- */
+      document.addEventListener('copy', function () {
+        var selected = '';
+        try {
+          selected = String(window.getSelection() || '').trim().replace(/\s+/g, ' ');
+        } catch (e) {
+          /* noop */
+        }
+        track('copy_text', {
+          copy_length: selected.length,
+          copy_preview: selected.length > 60 ? selected.slice(0, 60) + '…' : selected,
+        });
+      });
+
+      /* ---------- 9. API publik ---------- */
+      /* Memudahkan pelacakan event khusus dari halaman tertentu,
+         mis. window.deepinTrack('os_select', { arch: 'arm64' }) */
+      window.deepinTrack = track;
+      window.__gaReady = true;
+    });
+  })();
+</script>
