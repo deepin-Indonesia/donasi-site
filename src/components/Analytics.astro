@@ -15,11 +15,16 @@
  *  - outbound_click (keluar situs, mis. Telegram/YouTube/GitHub)
  *  - download_click (ISO, .torrent, .deb, .rpm, .AppImage, .zip)
  *  - nav_click (klik menu, header maupun drawer mobile)
+ *  - dropdown_toggle (buka/tutup menu dropdown di header)
+ *  - menu_section_toggle (buka/tutup seksi di drawer mobile)
  *  - menu_toggle (buka/tutup menu hamburger)
  *  - cta_click (tombol utama/outline)
+ *  - footer_click (klik tautan di footer)
+ *  - internal_site_click (pindah ke subdomain deepin.id lain)
  *  - anchor_click (lompat ke section: daftar isi, "selengkapnya")
  *  - filter_click (filter tag/kategori, mis. di halaman News)
  *  - contact_click (link mailto:/tel:)
+ *  - data_track (nama event bebas dari atribut `data-track` di HTML)
  *  - media_interaction (pemutar video/embed mulai diinteraksi)
  *  - form_submit (form apa pun yang dikirim)
  *  - share_click (bagikan artikel, per jaringan sosial)
@@ -51,8 +56,14 @@ const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
     });
 
     var SITE_HOST = window.location.host;
+    /* Semua event (termasuk page_view otomatis) ikut membawa dimensi `site`,
+       supaya kelima subdomain bisa dibandingkan dalam satu property GA4. */
+     gtag('set', 'user_properties', { site: SITE_HOST });
     var DOWNLOAD_RE = /\.(iso|torrent|deb|rpm|appimage|zip|img|sha256|sha512|sig|txt)(\?|#|$)/i;
     var SHARE_HOSTS = ['t.me', 'telegram.me', 'wa.me', 'whatsapp.com', 'x.com', 'twitter.com', 'facebook.com', 'linkedin.com', 'reddit.com'];
+     /* Subdomain deepin.id lain (deepin.id, os., news., donasi., about.) dihitung
+       sebagai "pindah situs internal", bukan keluar dari ekosistem. */
+     var SIBLING_RE = /(^|\.)deepin\.id$/i;
 
     /** Kirim event dengan konteks halaman + subdomain. */
     function track(name, params) {
@@ -96,6 +107,7 @@ const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
         host: url.hostname,
         path: url.pathname,
         sameSite: sameSite,
+        sibling: !sameSite && SIBLING_RE.test(url.hostname),
         download: DOWNLOAD_RE.test(url.pathname),
         share: SHARE_HOSTS.some(function (h) {
           return url.hostname === h || url.hostname.endsWith('.' + h);
@@ -197,6 +209,20 @@ const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
             return;
           }
 
+          /* 4b-2. Tombol dropdown di header (Tentang deepin, News, dll.) */
+          var dropdownBtn = target.closest('header button, header summary');
+          if (dropdownBtn) {
+            track('dropdown_toggle', { menu: labelOf(dropdownBtn) });
+            return;
+          }
+
+          /* 4b-3. Seksi yang dibuka/ditutup di drawer mobile */
+          var sectionToggle = target.closest('#mobile-menu summary');
+          if (sectionToggle) {
+            track('menu_section_toggle', { section: labelOf(sectionToggle) });
+            return;
+          }
+
           /* 4c. Tab (mis. arsitektur di halaman download) */
           var tab = target.closest('.arch-tab, [data-tab], [role="tab"]');
           if (tab && !target.closest('a[href]')) {
@@ -230,6 +256,12 @@ const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
           var info = classify(anchor);
           if (!info) return;
 
+          /* 4f-2. Event kustom dari HTML: <a data-track="nama_event"> */
+          var customEvent = anchor.getAttribute('data-track');
+          if (customEvent) {
+            track(customEvent, { link_text: text, destination: info.url });
+          }
+
           /* 4g. Filter tag / kategori */
           if (anchor.closest('.tag-filter') || anchor.hasAttribute('data-tag')) {
             track('filter_click', {
@@ -249,13 +281,28 @@ const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
             return;
           }
 
-          if (!info.sameSite) {
+          if (!info.sameSite && info.sibling) {
+            track('internal_site_click', {
+              destination_site: info.host,
+              link_url: info.url,
+              link_text: text,
+            });
+          } else if (!info.sameSite) {
             track('outbound_click', { link_domain: info.host, link_url: info.url, link_text: text });
           }
 
           /* Klik menu (header / drawer mobile) */
           if (anchor.closest('header') || anchor.closest('#mobile-menu')) {
             track('nav_click', {
+              link_text: text,
+              destination: info.url,
+              outbound: !info.sameSite,
+            });
+          }
+
+          /* Klik tautan di footer */
+          if (anchor.closest('footer')) {
+            track('footer_click', {
               link_text: text,
               destination: info.url,
               outbound: !info.sameSite,

@@ -14,8 +14,14 @@
     });
 
     var SITE_HOST = window.location.host;
+    /* Semua event (termasuk page_view otomatis) ikut membawa dimensi `site`,
+       supaya kelima subdomain bisa dibandingkan dalam satu property GA4. */
+     gtag('set', 'user_properties', { site: SITE_HOST });
     var DOWNLOAD_RE = /\.(iso|torrent|deb|rpm|appimage|zip|img|sha256|sha512|sig|txt)(\?|#|$)/i;
     var SHARE_HOSTS = ['t.me', 'telegram.me', 'wa.me', 'whatsapp.com', 'x.com', 'twitter.com', 'facebook.com', 'linkedin.com', 'reddit.com'];
+     /* Subdomain deepin.id lain (deepin.id, os., news., donasi., about.) dihitung
+       sebagai "pindah situs internal", bukan keluar dari ekosistem. */
+     var SIBLING_RE = /(^|\.)deepin\.id$/i;
 
     /** Kirim event dengan konteks halaman + subdomain. */
     function track(name, params) {
@@ -59,6 +65,7 @@
         host: url.hostname,
         path: url.pathname,
         sameSite: sameSite,
+        sibling: !sameSite && SIBLING_RE.test(url.hostname),
         download: DOWNLOAD_RE.test(url.pathname),
         share: SHARE_HOSTS.some(function (h) {
           return url.hostname === h || url.hostname.endsWith('.' + h);
@@ -160,6 +167,20 @@
             return;
           }
 
+          /* 4b-2. Tombol dropdown di header (Tentang deepin, News, dll.) */
+          var dropdownBtn = target.closest('header button, header summary');
+          if (dropdownBtn) {
+            track('dropdown_toggle', { menu: labelOf(dropdownBtn) });
+            return;
+          }
+
+          /* 4b-3. Seksi yang dibuka/ditutup di drawer mobile */
+          var sectionToggle = target.closest('#mobile-menu summary');
+          if (sectionToggle) {
+            track('menu_section_toggle', { section: labelOf(sectionToggle) });
+            return;
+          }
+
           /* 4c. Tab (mis. arsitektur di halaman download) */
           var tab = target.closest('.arch-tab, [data-tab], [role="tab"]');
           if (tab && !target.closest('a[href]')) {
@@ -193,6 +214,12 @@
           var info = classify(anchor);
           if (!info) return;
 
+          /* 4f-2. Event kustom dari HTML: <a data-track="nama_event"> */
+          var customEvent = anchor.getAttribute('data-track');
+          if (customEvent) {
+            track(customEvent, { link_text: text, destination: info.url });
+          }
+
           /* 4g. Filter tag / kategori */
           if (anchor.closest('.tag-filter') || anchor.hasAttribute('data-tag')) {
             track('filter_click', {
@@ -212,13 +239,28 @@
             return;
           }
 
-          if (!info.sameSite) {
+          if (!info.sameSite && info.sibling) {
+            track('internal_site_click', {
+              destination_site: info.host,
+              link_url: info.url,
+              link_text: text,
+            });
+          } else if (!info.sameSite) {
             track('outbound_click', { link_domain: info.host, link_url: info.url, link_text: text });
           }
 
           /* Klik menu (header / drawer mobile) */
           if (anchor.closest('header') || anchor.closest('#mobile-menu')) {
             track('nav_click', {
+              link_text: text,
+              destination: info.url,
+              outbound: !info.sameSite,
+            });
+          }
+
+          /* Klik tautan di footer */
+          if (anchor.closest('footer')) {
+            track('footer_click', {
               link_text: text,
               destination: info.url,
               outbound: !info.sameSite,
