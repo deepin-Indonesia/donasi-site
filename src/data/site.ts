@@ -47,7 +47,7 @@ export const ABOUT_NAV: NavItem[] = [
       { title: 'Product Planning', url: 'https://about.deepin.id/product-planning/' },
       { title: 'Original Apps', url: 'https://about.deepin.id/original-apps/' },
       { title: 'Desktop Environment', url: 'https://about.deepin.id/desktop-environment/' },
-      { title: 'deepin Indonesia', url: 'https://deepin.id', highlight: true },
+      { title: 'deepin Indonesia', url: 'https://about.deepin.id/Indonesia', highlight: true },
     ],
   },
 ];
