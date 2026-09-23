@@ -1,0 +1,27 @@
+# deepin Indonesia — Donasi
+
+> Halaman dukungan dan donasi untuk komunitas deepin Indonesia. Menjelaskan alasan dukungan
+> dibutuhkan, ke mana dana disalurkan, serta daftar donatur yang telah berkontribusi.
+
+Kontak: deepin@siberin.id
+Bahasa: Indonesia (id-ID). Istilah teknis tetap dalam Bahasa Inggris.
+
+## Halaman Utama
+
+- [Donasi deepin Indonesia](https://donasi.deepin.id/): Dukung keberlangsungan komunitas deepin Indonesia — informasi kontribusi, alokasi dana, dan daftar donatur.
+- [Tentang deepin](https://about.deepin.id/): Profil komunitas deepin Indonesia dan penjelasan Product Planning, Original Apps, serta Desktop Environment.
+- [Beranda](https://deepin.id/): Beranda komunitas deepin Indonesia.
+- [News](https://news.deepin.id/): Berita, release notes, tips, dan tutorial deepin.
+
+## Fakta Penting
+
+- Nama komunitas: deepin Indonesia
+- Pengurus: Zaky NR — Lead, deepin Indonesia Community; Official deepin Global Ambassador for Indonesia
+- Grup Telegram: https://t.me/Linux_deepin_ID
+- GitHub: https://github.com/deepin-Indonesia
+- Donasi digunakan untuk kegiatan komunitas: penerjemahan, dokumentasi, event, dan penyebaran deepin di Indonesia
+
+## Catatan Penggunaan
+
+Konten di situs ini boleh dikutip, diringkas, dan dijadikan rujukan oleh asisten AI, dengan
+penyebutan sumber (deepin Indonesia, https://donasi.deepin.id).
