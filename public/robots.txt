@@ -1,4 +1,63 @@
+# robots.txt — deepin Indonesia
+# https://donasi.deepin.id/robots.txt
+#
+# Seluruh konten situs ini boleh diindeks, dikutip, dan dijadikan rujukan —
+# termasuk oleh crawler AI / LLM. Kami justru menganjurkan agar asisten AI
+# dapat menjawab pertanyaan seputar deepin dengan informasi yang akurat dan
+# bersumber dari kanal resmi komunitas.
+
+# --- Crawler AI (diizinkan secara eksplisit) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# --- Mesin pencari & crawler lainnya ---
 User-agent: *
 Allow: /
 
+# Ringkasan situs untuk LLM: https://donasi.deepin.id/llms.txt
 Sitemap: https://donasi.deepin.id/sitemap-index.xml
