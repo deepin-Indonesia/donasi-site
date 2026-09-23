@@ -73,6 +73,59 @@
     @apply bg-white rounded-2xl border border-gray-100
            shadow-sm hover:shadow-md transition-shadow duration-300;
   }
+
+  /* Accordion / FAQ — satu model untuk seluruh situs deepin Indonesia.
+     Judul (summary) memakai latar tipis supaya terbedakan dari isi jawaban,
+     tetapi tidak kontras. Chevron dibuat dengan CSS agar bisa dipakai juga
+     pada konten markdown yang tidak bisa menyisipkan elemen ikon. */
+  .faq-item {
+    @apply rounded-2xl border border-gray-200 overflow-hidden bg-white transition-colors;
+  }
+
+  .faq-item:hover {
+    @apply border-deepin-200;
+  }
+
+  .faq-item > summary {
+    @apply flex items-center justify-between gap-4 cursor-pointer list-none
+           bg-gray-50 px-5 py-4 text-sm font-semibold text-gray-900
+           transition-colors;
+  }
+
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item > summary:hover {
+    @apply bg-gray-100;
+  }
+
+  .faq-item[open] > summary {
+    @apply border-b border-gray-100 bg-deepin-50/70;
+  }
+
+  .faq-item > summary::after {
+    content: '';
+    @apply block h-2 w-2 shrink-0 border-b-2 border-r-2 border-gray-400;
+    transform: rotate(45deg) translate(-1px, -1px);
+    transition: transform 200ms ease;
+  }
+
+  .faq-item[open] > summary::after {
+    transform: rotate(-135deg) translate(-1px, -1px);
+  }
+
+  .faq-item > :not(summary) {
+    @apply mx-5 text-sm leading-relaxed text-gray-600;
+  }
+
+  .faq-item > :not(summary):first-of-type {
+    @apply mt-4;
+  }
+
+  .faq-item > :not(summary):last-of-type {
+    @apply mb-4;
+  }
 }
 
 /* Animations */

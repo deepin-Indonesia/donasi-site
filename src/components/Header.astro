@@ -94,12 +94,9 @@ const currentPath = Astro.url.pathname;
     <div class="container-main py-6 space-y-2">
       {MAIN_NAV.map((item) => (
         item.children ? (
-          <details class="group">
-            <summary class="flex items-center justify-between py-3 px-4 rounded-xl text-gray-800 font-medium cursor-pointer hover:bg-gray-50">
-              {item.title}
-              <i class="fas fa-chevron-down text-xs opacity-40 group-open:rotate-180 transition-transform" />
-            </summary>
-            <div class="ml-4 mt-1 space-y-1">
+          <details class="faq-item">
+            <summary>{item.title}</summary>
+            <div class="space-y-1">
               {item.children.map((child) => (
                 <a href={child.url} class="block py-2.5 px-4 rounded-lg text-sm text-gray-600 hover:bg-gray-50">
                   {child.title}
@@ -118,12 +115,9 @@ const currentPath = Astro.url.pathname;
         )
       ))}
       <!-- Tentang deepin -->
-      <details class="group">
-        <summary class="flex items-center justify-between py-3 px-4 rounded-xl text-gray-800 font-medium cursor-pointer hover:bg-gray-50">
-          Tentang deepin
-          <i class="fas fa-chevron-down text-xs opacity-40 group-open:rotate-180 transition-transform" />
-        </summary>
-        <div class="ml-4 mt-1 space-y-1">
+      <details class="faq-item">
+        <summary>Tentang deepin</summary>
+        <div class="space-y-1">
           {ABOUT_NAV[0].children?.map((child) => (
             <a href={child.url} class={`block py-2.5 px-4 rounded-lg text-sm hover:bg-gray-50 ${child.highlight ? 'text-deepin-600 font-semibold' : 'text-gray-600'}`}>
               {child.title}
