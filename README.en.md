@@ -223,6 +223,30 @@ Custom events are added via `data-track`:
 
 > ⚠️ Do not push directly to `main` — that branch goes live automatically.
 
+## Troubleshooting & Contact
+
+### Branch `main` vs `preview`
+
+- **`main`** — production. Every push deploys via Cloudflare Pages.
+- **`preview`** — staging. All changes land here first; every push to `preview` also produces a Cloudflare Pages *preview deployment* URL for review before merging into `main`.
+
+### Common issues
+
+| Issue | Fix |
+|---|---|
+| Port `4321` already in use | Astro moves to the next port automatically, or run `npm run dev -- --port 4322`. |
+| Build fails after updating dependencies | Delete `node_modules` and `package-lock.json`, then run `npm install` again. |
+| 404 in dev | Make sure the route file exists in `src/pages/` and the filename is exact (case-sensitive on Linux). |
+| Changes not showing | Hard-refresh (`Ctrl+Shift+R`) or restart the dev server. |
+| Node.js too old | Use Node.js 20+; check with `node -v`. |
+| `generate_donors.py` fails | Make sure Python 3 is installed and `tools/donors_private.csv` is filled in. |
+
+### Reporting issues
+
+- **Bugs / feature requests** → open an [Issue](https://github.com/deepin-Indonesia/donasi-site/issues).
+- **Quick chat** → [deepin Indonesia Telegram group](https://t.me/Linux_deepin_ID).
+- **Contact** → [deepin@siberin.id](mailto:deepin@siberin.id).
+
 ## License
 
 Released under the [MIT License](LICENSE) © deepin Indonesia.

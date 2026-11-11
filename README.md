@@ -223,6 +223,30 @@ Event kustom ditambahkan lewat `data-track`:
 
 > ⚠️ Jangan push langsung ke `main` — branch itu otomatis tayang.
 
+## Pemecahan Masalah & Kontak
+
+### Branch `main` vs `preview`
+
+- **`main`** — produksi. Setiap push otomatis tayang lewat Cloudflare Pages.
+- **`preview`** — staging. Semua perubahan masuk ke sini dulu; setiap push ke `preview` juga menghasilkan URL *preview deployment* Cloudflare Pages untuk dicek sebelum merge ke `main`.
+
+### Masalah umum
+
+| Masalah | Solusi |
+|---|---|
+| Port `4321` sudah dipakai | Astro otomatis pindah ke port berikutnya, atau jalankan `npm run dev -- --port 4322`. |
+| Build gagal setelah update dependensi | Hapus `node_modules` dan `package-lock.json`, lalu `npm install` ulang. |
+| Halaman 404 saat dev | Pastikan file route ada di `src/pages/` dan nama file benar (huruf besar/kecil berpengaruh di Linux). |
+| Perubahan tidak muncul | Hard refresh (`Ctrl+Shift+R`) atau restart dev server. |
+| Node.js terlalu lama | Gunakan Node.js 20+; cek dengan `node -v`. |
+| `generate_donors.py` gagal | Pastikan Python 3 terpasang dan `tools/donors_private.csv` sudah diisi. |
+
+### Melaporkan masalah
+
+- **Bug / usulan fitur** → buka [Issue](https://github.com/deepin-Indonesia/donasi-site/issues).
+- **Diskusi cepat** → [grup Telegram deepin Indonesia](https://t.me/Linux_deepin_ID).
+- **Kontak** → [deepin@siberin.id](mailto:deepin@siberin.id).
+
 ## Lisensi
 
 Dirilis di bawah [MIT License](LICENSE) © deepin Indonesia.
