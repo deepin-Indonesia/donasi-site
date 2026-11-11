@@ -227,8 +227,8 @@ Custom events are added via `data-track`:
 
 ### Branch `main` vs `preview`
 
-- **`main`** — production. Every push deploys via Cloudflare Pages.
-- **`preview`** — staging. All changes land here first; every push to `preview` also produces a Cloudflare Pages *preview deployment* URL for review before merging into `main`.
+- **`main`** — production. Only pushes to `main` trigger **Cloudflare Pages**, which deploys automatically to the main domain.
+- **`preview`** — staging for review. Pushing to `preview` does **not** trigger a deploy; changes are reviewed **locally** (`npm run dev`) before merging into `main`.
 
 ### Common issues
 

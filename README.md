@@ -227,8 +227,8 @@ Event kustom ditambahkan lewat `data-track`:
 
 ### Branch `main` vs `preview`
 
-- **`main`** — produksi. Setiap push otomatis tayang lewat Cloudflare Pages.
-- **`preview`** — staging. Semua perubahan masuk ke sini dulu; setiap push ke `preview` juga menghasilkan URL *preview deployment* Cloudflare Pages untuk dicek sebelum merge ke `main`.
+- **`main`** — produksi. Hanya push ke `main` yang memicu **Cloudflare Pages**, dan hasilnya otomatis tayang di domain utama.
+- **`preview`** — staging untuk review. Push ke `preview` **tidak** memicu deploy; perubahan dicek secara **lokal** (`npm run dev`) sebelum di-merge ke `main`.
 
 ### Masalah umum
 
