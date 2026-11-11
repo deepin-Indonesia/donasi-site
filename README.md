@@ -1,156 +1,148 @@
+<div align="center">
+
 # deepin Indonesia — Donasi Site
 
-Halaman donasi komunitas deepin Indonesia: **[donasi.deepin.id](https://donasi.deepin.id)**
+**Halaman donasi komunitas deepin Indonesia**
 
-Menampilkan total donasi, top 3 donatur, 10 donasi terbaru, dan tombol donasi via Midtrans Payment Link.
+[donasi.deepin.id](https://donasi.deepin.id) · 🇮🇩 **Bahasa Indonesia** · [🇬🇧 English](README.en.md)
+
+</div>
 
 ---
 
+Halaman donasi statis untuk **[donasi.deepin.id](https://donasi.deepin.id)** — menampilkan total donasi, top 3 donatur, 10 donasi terbaru, dan tombol pembayaran aman via **Midtrans Payment Link**.
+
+## Daftar Isi
+
+- [Tentang Proyek](#tentang-proyek)
+- [Fitur](#fitur)
+- [Tech Stack](#tech-stack)
+- [Struktur Proyek](#struktur-proyek)
+- [Memulai](#memulai)
+- [Alur Donasi](#alur-donasi)
+- [Mengelola Data Donatur](#mengelola-data-donatur)
+- [Keamanan Data](#keamanan-data)
+- [Deployment](#deployment)
+- [SEO, Performa & AdSense](#seo-performa--adsense)
+- [Analitik](#analitik)
+- [Berkontribusi](#berkontribusi)
+- [Lisensi](#lisensi)
+
+## Tentang Proyek
+
+`donasi-site` adalah halaman donasi resmi komunitas deepin Indonesia. Donasi dipakai untuk operasional server, event komunitas, konten edukasi, dan keberlangsungan ekosistem open source deepin di Indonesia.
+
+Pembayaran diproses melalui **Midtrans** (PT Midtrans, bagian dari GoTo Financial) — mendukung transfer bank, GoPay, QRIS, dan virtual account. Situs ini **tidak** menyimpan nomor kartu, CVV, atau kredensial pembayaran; semua ditangani Midtrans.
+
+### Ekosistem deepin Indonesia
+
+| Subdomain | Repo | Fungsi |
+|---|---|---|
+| [deepin.id](https://deepin.id) | `home-site` | Halaman utama |
+| [os.deepin.id](https://os.deepin.id) | `download-site` | Download image deepin |
+| [news.deepin.id](https://news.deepin.id) | `news-site` | Berita & artikel |
+| [about.deepin.id](https://about.deepin.id) | `about-site` | Tentang & product planning |
+| [donasi.deepin.id](https://donasi.deepin.id) | `donasi-site` ← repo ini | Donasi komunitas |
+
+## Fitur
+
+- **Total donasi** dan jumlah donasi terkumpul.
+- **Top 3 donatur** berdasarkan akumulasi.
+- **10 donasi terbaru** dengan tanggal.
+- **Donatur anonim** (nama dikosongkan) dihitung terpisah.
+- **Tombol donasi Midtrans** dengan pelacakan konversi (`donate_click`).
+- **Privasi**: email disensor, nomor HP tidak pernah dipublikasikan.
+- **SEO**, Google Analytics, dan Google AdSense.
+
 ## Tech Stack
 
-| Technology | Detail |
+| Teknologi | Detail |
 |---|---|
 | **Framework** | [Astro 7](https://astro.build) |
 | **Styling** | [Tailwind CSS v4](https://tailwindcss.com) |
-| **Icons** | [Font Awesome 6](https://fontawesome.com) (CDN) |
+| **Bahasa** | TypeScript (`strict`), alias `@/*` → `src/*` |
+| **Ikon** | [Font Awesome 6](https://fontawesome.com) (CDN) |
+| **Pembayaran** | [Midtrans Payment Link](https://midtrans.com) |
+| **Tooling data** | Python 3 (`tools/generate_donors.py`) |
 | **Sitemap** | `@astrojs/sitemap` |
-| **Donasi** | [Midtrans Payment Link](https://midtrans.com) |
+| **Analitik** | Google Analytics 4 — `G-2J4TLB9W7H` |
+| **Iklan** | Google AdSense — `ca-pub-1345939033565649` |
 | **Deploy** | [Cloudflare Pages](https://pages.cloudflare.com) |
-| **Analytics** | Google Analytics 4 (`G-2J4TLB9W7H`) |
-| **Runtime** | Node.js 24 |
+| **Runtime** | Node.js 20+ |
 
-## Project Structure
+## Struktur Proyek
 
 ```
 donasi-site/
 ├── src/
 │   ├── components/
-│   │   ├── Layout.astro      # Base layout (HTML head, GA4, SEO meta)
-│   │   ├── Analytics.astro   # Google Analytics 4 + pelacakan perilaku pengguna
-│   │   ├── Header.astro      # Sticky header + nav + mobile menu
-│   │   ├── Footer.astro      # Footer dengan social links
-│   │   └── WhyDeepin.astro   # Section keunggulan deepin
+│   │   ├── Layout.astro      # <head>, SEO, AdSense, GA, privasi
+│   │   ├── Header.astro
+│   │   ├── Footer.astro
+│   │   ├── Analytics.astro
+│   │   └── WhyDeepin.astro
 │   ├── data/
-│   │   ├── site.ts           # Site config, MAIN_NAV, ABOUT_NAV, social
-│   │   └── donors.ts         # Data donatur (dari CSV) — format, total, top3, latest
+│   │   ├── site.ts           # Konfigurasi situs
+│   │   └── donors.ts         # Data donatur (auto-generated) + formatRupiah
 │   ├── pages/
-│   │   ├── index.astro       # Halaman donasi — hero, stats, Midtrans CTA, donor list
-│   │   └── 404.astro         # Custom 404
+│   │   ├── index.astro       # Halaman donasi
+│   │   └── 404.astro         # 404 (noindex)
 │   └── styles/
-│       └── global.css        # Tailwind import + @theme colors
+│       └── global.css        # Tailwind + palet deepin
 ├── public/
-│   └── robots.txt            # Crawler rules + Sitemap directive
+│   ├── _redirects            # /privacy/ → https://deepin.id/privacy/ (301)
+│   ├── ads.txt
+│   ├── robots.txt
+│   ├── llms.txt
+│   └── site.webmanifest
 ├── tools/
-│   ├── generate_donors.py            # Python script: sensor email, generate HMAC-SHA512 donor_id
+│   ├── generate_donors.py            # CSV privat → donors.ts (sensor + HMAC)
+│   ├── csv_to_ts.py                  # CSV publik → donors.ts
 │   ├── donors_private.example.csv    # Contoh format data privat
-│   ├── donors_private.csv           # 🔒 Gitignored — data asli (nama, email, no HP, amount)
-│   └── .secret_key                  # 🔒 Gitignored — key HMAC
-├── astro.config.mjs          # site: https://donasi.deepin.id
-├── package.json
-└── tsconfig.json
+│   ├── donors_private.csv            # 🔒 gitignored — data asli
+│   └── .secret_key                   # 🔒 gitignored — kunci HMAC
+├── astro.config.mjs
+├── tsconfig.json
+└── package.json
 ```
 
-## Getting Started
+## Memulai
+
+### Prasyarat
+
+- [Node.js](https://nodejs.org) 20+
+- Python 3 (hanya untuk mengelola data donatur)
+
+### Instalasi & pengembangan
 
 ```bash
 git clone https://github.com/deepin-Indonesia/donasi-site.git
 cd donasi-site
 npm install
-npm run dev        # → http://localhost:4323
-npm run build      # Production build → dist/
+npm run dev        # → http://localhost:4321 (atau port berikutnya)
 ```
 
-## Deployment
+### Perintah
 
-Push ke branch `main` → Cloudflare Pages auto-deploy.
-
-| Setting | Value |
+| Perintah | Kegunaan |
 |---|---|
-| Build command | `npm run build` |
-| Output directory | `dist` |
-| Branch | `main` |
+| `npm run dev` | Server pengembangan |
+| `npm run build` | Build produksi ke `dist/` |
+| `npm run preview` | Preview hasil build |
 
-## Contributing
+## Alur Donasi
 
-Semua orang bisa berkontribusi — tidak perlu jadi anggota organisasi.
+1. Pengunjung klik **"Donasi via Midtrans"** → diarahkan ke payment link Midtrans.
+2. Midtrans memproses pembayaran (transfer bank, GoPay, QRIS, virtual account).
+3. Setelah pembayaran berhasil, data donasi (nama, email, nomor HP, nominal, tanggal) dicatat oleh pengelola komunitas.
+4. Pengelola memperbarui `tools/donors_private.csv`, menjalankan generator, lalu commit `src/data/donors.ts`.
+5. Halaman menampilkan total, top 3, dan donasi terbaru dari data yang sudah dianonimkan.
 
-### Untuk kontributor luar (via Fork)
+## Mengelola Data Donatur
 
-1. **Fork** repo ini (klik tombol Fork di GitHub)
-2. Clone fork kamu: `git clone https://github.com/USERNAME/donasi-site.git`
-3. `git checkout preview && git checkout -b feat/deskripsi`
-4. Edit, commit, push ke fork kamu
-5. Buka **Pull Request (PR)** ke `deepin-Indonesia/donasi-site` → target: `preview`
+### 1. Isi data privat
 
-### Untuk anggota organisasi (push langsung)
-
-1. `git checkout preview && git checkout -b feat/deskripsi`
-2. Commit & push
-3. Buat PR ke `preview`
-4. Setelah review, merge `preview` → `main`
-
-> ⚠️ Jangan push langsung ke `main` — harus lewat PR (Pull Request).
-
-## Analitik (Google Analytics 4)
-
-Measurement ID: `G-2J4TLB9W7H` (satu property untuk kelima subdomain).
-
-Pelacakan terpusat di `src/components/Analytics.astro` dan dirender sekali dari
-`src/components/Layout.astro` (`<Analytics />`), jadi **semua halaman otomatis
-terlacak** — tidak perlu menambah script per halaman.
-
-Setiap event membawa parameter `site` (dari `location.host`) supaya data tiap
-subdomain bisa dipisah di GA4. `site` juga dikirim sebagai *user property* agar
-`page_view` ikut terpisah.
-
-| Event | Dipicu oleh |
-| --- | --- |
-| `page_view` | Otomatis setiap halaman |
-| `page_context` | Referrer, viewport, ukuran layar, bahasa, `utm_*` |
-| `page_404` | Halaman tidak ditemukan (+ path-nya) |
-| `scroll_depth` | Scroll 25/50/75/90/100% |
-| `engaged_reader` | 30/60/180/600 detik benar-benar aktif |
-| `visibility_change` | Tab berpindah/aktif kembali |
-| `nav_click` | Klik menu di header atau drawer mobile |
-| `dropdown_toggle` | Buka/tutup dropdown header |
-| `menu_toggle` | Buka/tutup hamburger mobile |
-| `menu_section_toggle` | Buka/tutup seksi di drawer mobile |
-| `cta_click` | Tombol `.btn-primary` / `.btn-outline` / `.btn-ghost` |
-| `donate_click` | Klik tombol "Donasi via Midtrans" (konversi utama) |
-| `footer_click` | Klik tautan di footer |
-| `internal_site_click` | Pindah ke subdomain `deepin.id` lain |
-| `outbound_click` | Keluar dari ekosistem `deepin.id` |
-| `anchor_click` | Lompat ke section (`#...`) |
-| `faq_toggle` | Buka accordion (`<details>`) |
-| `contact_click` | Klik `mailto:` atau `tel:` |
-| `copy_text` | Menyalin teks |
-| `scroll_top` | Tombol kembali ke atas |
-| `form_submit` | Mengirim form |
-| `media_interaction` | Mulai memutar video/embed |
-| `data_track` | Nama bebas dari atribut `data-track` di elemen `<a>` |
-
-### Event kustom
-
-Tempel `data-track` pada elemen `<a>` untuk mengirim event dengan nama sendiri
-(dipakai tombol Midtrans):
-
-```html
-<a href="https://app.midtrans.com/..." data-track="donate_click">Donasi</a>
-```
-
-Atau panggil dari script mana pun:
-
-```js
-window.deepinTrack('nominal_select', { amount: 50000 });
-```
-
-`window.__gaReady === true` menandakan pelacakan siap (berguna untuk pengujian).
-
-## Cara Update Data Donatur
-
-### 1. Edit data privat
-
-`tools/donors_private.csv` (⚠️ **gitignored**):
+`tools/donors_private.csv` (⚠️ **gitignored** — jangan pernah di-commit):
 
 ```csv
 name,email,phone,amount,date
@@ -159,15 +151,21 @@ Siti Rahayu,siti@email.com,,150000,2026-07-30
 ,,,50000,2026-07-30
 ```
 
+- Nama kosong → donasi anonim.
+- Nomor HP opsional dan **tidak akan** dipublikasikan.
+
 ### 2. Generate data publik
 
 ```bash
 python tools/generate_donors.py
 ```
 
-Output: `src/data/donors.ts` — email disensor, donor_id HMAC-SHA512, no HP dihapus.
+Output `src/data/donors.ts`:
+- Email disensor menjadi 4 karakter pertama + `********`.
+- `donor_id` = HMAC-SHA512(email, secret key), 12 karakter — tidak bisa dibalik.
+- Nomor HP dihapus.
 
-### 3. Commit & push
+### 3. Commit & deploy
 
 ```bash
 git add src/data/donors.ts
@@ -175,11 +173,64 @@ git commit -m "update: data donatur"
 git push origin preview
 ```
 
-## 🔒 Keamanan
+Setelah review, merge `preview` → `main`.
+
+## Keamanan Data
 
 | # | Lapisan |
 |---|---|
-| 1 | `donors_private.csv` — gitignored, data asli tidak pernah commit |
-| 2 | `generate_donors.py` — sensor email (4 karakter + `********`), hapus No HP |
-| 3 | `HMAC-SHA512` — donor_id dari email + secret key, impossible to reverse |
-| 4 | `.secret_key` — gitignored, tanpa key tidak bisa verifikasi apapun |
+| 1 | `donors_private.csv` — gitignored; data asli tidak pernah masuk repo |
+| 2 | `generate_donors.py` — sensor email (4 karakter + `********`) dan hapus nomor HP |
+| 3 | `HMAC-SHA512` — `donor_id` dari email + secret key; tidak bisa dibalik |
+| 4 | `.secret_key` — gitignored; tanpa key, `donor_id` tidak bisa direproduksi |
+
+> 🔒 **Jangan commit** `donors_private.csv`, `.secret_key`, atau data pribadi dalam bentuk apa pun.
+
+## Deployment
+
+Push ke `main` → **Cloudflare Pages** otomatis build & deploy.
+
+| Setting | Nilai |
+|---|---|
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| Production branch | `main` |
+
+## SEO, Performa & AdSense
+
+- **Meta per halaman**: description, canonical, `robots`, `hreflang`.
+- **Open Graph & Twitter Card** lengkap.
+- **JSON-LD** `Organization`; 404 `noindex, follow`.
+- **Sitemap** otomatis + `robots.txt` + `llms.txt`.
+- **AdSense** via script + `google-adsense-account` + `public/ads.txt`.
+- **Kebijakan Privasi** terpusat di **https://deepin.id/privacy/** (mencakup data donasi & Midtrans); `/privacy/` di subdomain ini 301 ke sana.
+
+## Analitik
+
+Satu property GA4 (`G-2J4TLB9W7H`) untuk semua subdomain; setiap event membawa parameter `site`. Event utama di halaman ini: **`donate_click`** (klik tombol Midtrans), `cta_click`, `contact_click`, `footer_click`.
+
+Event kustom ditambahkan lewat `data-track`:
+
+```html
+<a href="https://app.midtrans.com/..." data-track="donate_click">Donasi via Midtrans</a>
+```
+
+## Berkontribusi
+
+1. Fork repo, lalu buat branch dari `preview`: `git checkout preview && git checkout -b feat/deskripsi`.
+2. Commit dengan pesan jelas, push ke fork, dan buka **Pull Request** ke `deepin-Indonesia/donasi-site` (target: **`preview`**).
+3. Setelah review, merge `preview` → `main`.
+
+> ⚠️ Jangan push langsung ke `main` — branch itu otomatis tayang.
+
+## Lisensi
+
+Dirilis di bawah [MIT License](LICENSE) © deepin Indonesia.
+
+---
+
+<div align="center">
+
+Dibuat dengan ❤️ oleh komunitas [deepin Indonesia](https://deepin.id) · [Telegram](https://t.me/Linux_deepin_ID) · [GitHub](https://github.com/deepin-Indonesia)
+
+</div>
