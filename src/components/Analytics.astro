@@ -39,8 +39,7 @@ import { SITE } from '@/data/site';
 const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
 ---
 
-<!-- Google Analytics 4 -->
-<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+<!-- Google Analytics 4 (gtag.js dimuat setelah halaman siap — lihat loadGtag) -->
 <script is:inline define:vars={{ GA4_ID }}>
   (function () {
     window.dataLayer = window.dataLayer || [];
@@ -54,6 +53,20 @@ const GA4_ID = SITE.ga4 ?? 'G-2J4TLB9W7H';
       anonymize_ip: true,
       transport_type: 'beacon',
     });
+
+    /* Muat gtag.js setelah halaman selesai dimuat agar tidak berebut bandwidth
+       dengan elemen LCP. Antrean `dataLayer` tetap menyimpan konfigurasi di atas. */
+    function loadGtag() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+      document.head.appendChild(s);
+    }
+    if (document.readyState === 'complete') {
+      loadGtag();
+    } else {
+      window.addEventListener('load', loadGtag, { once: true });
+    }
 
     var SITE_HOST = window.location.host;
     /* Semua event (termasuk page_view otomatis) ikut membawa dimensi `site`,
