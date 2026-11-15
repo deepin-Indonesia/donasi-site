@@ -170,10 +170,10 @@ Output `src/data/donors.ts`:
 ```bash
 git add src/data/donors.ts
 git commit -m "update: data donatur"
-git push origin preview
+git push origin feat/data-donatur
 ```
 
-Setelah review, merge `preview` → `main`.
+Setelah review, merge lewat **Pull Request**, lalu hapus branch fitur.
 
 ## Keamanan Data
 
@@ -217,18 +217,19 @@ Event kustom ditambahkan lewat `data-track`:
 
 ## Berkontribusi
 
-1. Fork repo, lalu buat branch dari `preview`: `git checkout preview && git checkout -b feat/deskripsi`.
-2. Commit dengan pesan jelas, push ke fork, dan buka **Pull Request** ke `deepin-Indonesia/donasi-site` (target: **`preview`**).
-3. Setelah review, merge `preview` → `main`.
+1. Fork repo, lalu buat branch fitur baru dari `main`: `git checkout main && git pull && git checkout -b feat/deskripsi`.
+2. Commit dengan pesan jelas, push ke fork, dan buka **Pull Request** ke `deepin-Indonesia/donasi-site` (target: **`main`**).
+3. Setelah review, merge lewat **Pull Request**, lalu hapus branch fitur.
 
 > ⚠️ Jangan push langsung ke `main` — branch itu otomatis tayang.
 
 ## Pemecahan Masalah & Kontak
 
-### Branch `main` vs `preview`
+### Alur branch
 
-- **`main`** — produksi. Hanya push ke `main` yang memicu **Cloudflare Pages**, dan hasilnya otomatis tayang di domain utama.
-- **`preview`** — staging untuk review. Push ke `preview` **tidak** memicu deploy; perubahan dicek secara **lokal** (`npm run dev`) sebelum di-merge ke `main`.
+- **`main`** — produksi. Hanya merge ke `main` yang memicu **Cloudflare Pages** dan tayang di domain utama. Branch ini dilindungi; perubahan masuk lewat **Pull Request**.
+- **Branch fitur** — setiap perubahan dibuat di branch baru dari `main`, mis. `feat/nama-fitur`, `fix/nama-bug`, atau `docs/nama-dokumen`. Setelah PR di-merge, branch fitur dihapus.
+- **`preview`** — sudah tidak dipakai. Semua review dilakukan lewat PR dan server lokal (`npm run dev`).
 
 ### Masalah umum
 

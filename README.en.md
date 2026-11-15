@@ -170,10 +170,10 @@ Output `src/data/donors.ts`:
 ```bash
 git add src/data/donors.ts
 git commit -m "update: donor data"
-git push origin preview
+git push origin feat/donor-data
 ```
 
-After review, merge `preview` → `main`.
+After review, merge through a **Pull Request**, then delete the feature branch.
 
 ## Data Security
 
@@ -217,18 +217,20 @@ Custom events are added via `data-track`:
 
 ## Contributing
 
-1. Fork the repo, then branch from `preview`: `git checkout preview && git checkout -b feat/description`.
-2. Commit with a clear message, push to your fork, and open a **Pull Request** against `deepin-Indonesia/donasi-site` (target: **`preview`**).
-3. After review, merge `preview` → `main`.
+1. Fork the repo, then create a feature branch from `main`: `git checkout main && git pull
+   git checkout -b feat/description`.
+2. Commit with a clear message, push to your fork, and open a **Pull Request** against `deepin-Indonesia/donasi-site` (target: **`main`**).
+3. After review, merge through a **Pull Request**, then delete the feature branch.
 
 > ⚠️ Do not push directly to `main` — that branch goes live automatically.
 
 ## Troubleshooting & Contact
 
-### Branch `main` vs `preview`
+### Branch workflow
 
-- **`main`** — production. Only pushes to `main` trigger **Cloudflare Pages**, which deploys automatically to the main domain.
-- **`preview`** — staging for review. Pushing to `preview` does **not** trigger a deploy; changes are reviewed **locally** (`npm run dev`) before merging into `main`.
+- **`main`** — production. Only merges into `main` trigger **Cloudflare Pages** and go live on the main domain. This branch is protected; changes go through **Pull Requests**.
+- **Feature branch** — every change lives on a new branch from `main`, e.g. `feat/feature-name`, `fix/bug-name`, or `docs/doc-name`. After the PR is merged, the feature branch is deleted.
+- **`preview`** — no longer used. All review happens through PRs and the local dev server (`npm run dev`).
 
 ### Common issues
 
